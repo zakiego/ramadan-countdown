@@ -12,11 +12,3 @@ export const ramadanSchema = z.array(
     }),
   }),
 );
-
-export const apiSchema = z.object({
-  countdown: z.object({
-    ramadanStartDate: z.coerce.date(),
-    currentDate: z.coerce.date(),
-    daysUntilRamadan: z.coerce.number(),
-  }),
-});
