@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
   const nextRamadan = await getNextRamadan();
 
   const countdown = await createCountdown({
-    nextRamadan: nextRamadan.entry.ramadanStart,
+    nextRamadan: nextRamadan.ramadanStart,
     timezoneOffset,
   });
 

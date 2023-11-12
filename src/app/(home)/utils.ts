@@ -3,27 +3,24 @@ import { sortBy } from "lodash";
 import { z } from "zod";
 
 export async function getNextRamadan() {
+  const resp = await fetch("https://ramadan.zakiego.com/api/history").then(
+    (r) => r.json(),
+  );
+
   const schema = z.array(
     z.object({
-      slug: z.coerce.number(),
-      entry: z.object({
-        year: z.coerce.number(),
-        ramadanStart: z.coerce.date(),
-        ramadanEnd: z.coerce.date(),
-        eidAlFitr: z.coerce.date(),
-        notes: z.any(),
-      }),
+      year: z.coerce.number(),
+      ramadanStart: z.coerce.date(),
+      ramadanEnd: z.coerce.date(),
+      eidAlFitr: z.coerce.date(),
     }),
   );
 
-  const data = sortBy(
-    await schema.parseAsync(await keystaticReader.collections.ramadan.all()),
-    (ramadan) => ramadan.entry.ramadanStart,
-  );
+  const data = sortBy(schema.parse(resp), (ramadan) => ramadan.ramadanStart);
 
   // find the next ramadan
   const now = new Date();
-  const nextRamadan = data.find((ramadan) => ramadan.entry.ramadanStart > now);
+  const nextRamadan = data.find((ramadan) => ramadan.ramadanStart > now);
 
   if (!nextRamadan) {
     throw new Error("Could not find next ramadan");

@@ -7,8 +7,8 @@ export async function generateMetadata() {
   const api = await getNextRamadan();
 
   return {
-    title: `Ramadan Countdown ${api.entry.year}`,
-    description: `Ramadan Countdown ${api.entry.year}`,
+    title: `Ramadan Countdown ${api.year}`,
+    description: `Ramadan Countdown ${api.year}`,
   };
 }
 
@@ -20,7 +20,7 @@ export default async function Page() {
       <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">
         Ramadan Countdown
       </h1>
-      <Countdown nextRamadan={api.entry.ramadanStart} />
+      <Countdown nextRamadan={api.ramadanStart} />
       <div className="absolute bottom-4 opacity-70">
         <p className="text-gray-600 text-sm">
           API available{" "}
