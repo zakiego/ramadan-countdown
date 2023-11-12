@@ -1,6 +1,11 @@
-![GitHub](/public/icon.png)
-
-# Ramadan Countdown
+<p align="center">
+  <a href="https://ramadan.zakiego.com/">
+    <picture>
+      <img src="https://raw.githubusercontent.com/zakiego/ramadan-countdown/main/public/icon.png?token=GHSAT0AAAAAAB57T3SBVSCKH432DOYANBIMZKQVROQ" height="128">
+    </picture>
+    <h1 align="center">Ramadan Countdown</h1>
+  </a>
+</p>
 
 This is a simple countdown app for Ramadan. It is built using [Next.js](https://nextjs.org/) and [Keystatic](https://keystatic.com/).
 
