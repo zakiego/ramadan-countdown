@@ -7,7 +7,7 @@ export function createCountdown({
 }) {
   const currentDate = new Date();
   const currentDateWithTimezoneOffset = new Date(
-    currentDate.getTime() + timezoneOffset * 60 * 1000,
+    currentDate.getTime() + timezoneOffset * 60 * 60 * 1000,
   );
   const ramadanStartDate = nextRamadan;
 
@@ -18,7 +18,7 @@ export function createCountdown({
 
   return {
     ramadanStartDate,
-    currentDate,
+    currentDate: currentDateWithTimezoneOffset,
     timezoneOffset,
     countdown: { days, hours, minutes, seconds },
   };
