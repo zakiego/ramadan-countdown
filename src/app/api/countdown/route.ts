@@ -19,5 +19,8 @@ export async function GET(request: NextRequest) {
     timezoneOffset,
   });
 
-  return NextResponse.json(countdown);
+  return NextResponse.json({
+    ...countdown,
+    repository: "https://github.com/zakiego/ramadan-countdown",
+  });
 }
