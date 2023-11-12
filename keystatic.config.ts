@@ -25,7 +25,7 @@ export const keystaticConfig = config({
     ramadan: collection({
       label: "Ramadan",
       slugField: "year",
-      path: "src/content/ramadan/*",
+      path: "public/content/ramadan/*",
       format: { data: "json" },
       schema: {
         year: fields.slug({ name: { label: "Ramadan Year" } }),
