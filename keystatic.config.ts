@@ -18,7 +18,9 @@ const storage: LocalConfig["storage"] | GitHubConfig["storage"] =
       };
 
 export const keystaticConfig = config({
-  storage,
+  storage: {
+    kind: "local",
+  },
   collections: {
     ramadan: collection({
       label: "Ramadan",
