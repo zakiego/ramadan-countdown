@@ -1,3 +1,5 @@
+![GitHub](/public/icon.png)
+
 # Ramadan Countdown
 
 This is a simple countdown app for Ramadan. It is built using [Next.js](https://nextjs.org/) and [Keystatic](https://keystatic.com/).
