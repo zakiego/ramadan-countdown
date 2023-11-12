@@ -1,7 +1,7 @@
 import Countdown from "@/app/(home)/countdown";
 import { getNextRamadan } from "@/app/(home)/utils";
 
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
   const api = await getNextRamadan();
