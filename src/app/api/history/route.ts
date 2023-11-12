@@ -1,5 +1,3 @@
-import { getNextRamadan } from "@/app/(home)/utils";
-import { createCountdown } from "@/utils/countdown";
 import { keystaticReader } from "@/utils/keystatic";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
