@@ -33,8 +33,8 @@ export default function Countdown(props: Props) {
   }
 
   return (
-    <div className="bg-white  shadow-lg rounded-lg p-8">
-      <div className="grid grid-cols-4 gap-4 text-center">
+    <div className="bg-white shadow-lg rounded-lg p-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
         <div>
           <p className="text-2xl font-semibold text-gray-800 ">Days</p>
           <p className="text-6xl font-bold text-gray-800 tabular-nums">
