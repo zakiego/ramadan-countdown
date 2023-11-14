@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://ramadan.zakiego.com/">
     <picture>
-      <img src="https://raw.githubusercontent.com/zakiego/ramadan-countdown/main/public/icon.png?token=GHSAT0AAAAAAB57T3SBVSCKH432DOYANBIMZKQVROQ" height="128">
+      <img src="https://raw.githubusercontent.com/zakiego/ramadan-countdown/main/public/icon.png" height="128">
     </picture>
     <h1 align="center">Ramadan Countdown</h1>
   </a>
