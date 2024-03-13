@@ -1,6 +1,6 @@
 import { getNextRamadan } from "@/app/(home)/utils";
 import { createCountdown } from "@/utils/countdown";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 export const dynamic = "force-dynamic";

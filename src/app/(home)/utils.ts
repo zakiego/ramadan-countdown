@@ -2,7 +2,7 @@ import { keystaticReader } from "@/utils/keystatic";
 import { sortBy } from "lodash";
 import { z } from "zod";
 
-export async function getNextRamadan() {
+export const getHistory = async () => {
   const resp = await fetch("https://ramadan.zakiego.com/api/history").then(
     (r) => r.json(),
   );
@@ -17,6 +17,12 @@ export async function getNextRamadan() {
   );
 
   const data = sortBy(schema.parse(resp), (ramadan) => ramadan.ramadanStart);
+
+  return data;
+};
+
+export async function getNextRamadan() {
+  const data = await getHistory();
 
   // find the next ramadan
   const now = new Date();
