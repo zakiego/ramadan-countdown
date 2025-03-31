@@ -1,11 +1,10 @@
+import { createEndpoint } from "@/utils/env";
 import { keystaticReader } from "@/utils/keystatic";
 import { sortBy } from "lodash";
 import { z } from "zod";
 
 export const getHistory = async () => {
-  const resp = await fetch("https://ramadan.zakiego.com/api/history").then(
-    (r) => r.json(),
-  );
+  const resp = await fetch(createEndpoint("/history")).then((r) => r.json());
 
   const schema = z.array(
     z.object({
