@@ -1,21 +1,27 @@
-import { createEndpoint } from "@/utils/env";
 import { keystaticReader } from "@/utils/keystatic";
 import { sortBy } from "lodash";
 import { z } from "zod";
 
 export const getHistory = async () => {
-  const resp = await fetch(createEndpoint("/history")).then((r) => r.json());
+  const rawData = await keystaticReader.collections.ramadan.all();
 
   const schema = z.array(
     z.object({
-      year: z.coerce.number(),
-      ramadanStart: z.coerce.date(),
-      ramadanEnd: z.coerce.date(),
-      eidAlFitr: z.coerce.date(),
+      slug: z.coerce.number(),
+      entry: z.object({
+        year: z.coerce.number(),
+        ramadanStart: z.coerce.date(),
+        ramadanEnd: z.coerce.date(),
+        eidAlFitr: z.coerce.date(),
+      }),
     }),
   );
 
-  const data = sortBy(schema.parse(resp), (ramadan) => ramadan.ramadanStart);
+  const parsed = schema.parse(rawData);
+  const data = sortBy(
+    parsed.map((r) => r.entry),
+    (ramadan) => ramadan.ramadanStart,
+  );
 
   return data;
 };
