@@ -7,11 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@keystatic/core": "^0.2.0",
@@ -36,8 +32,7 @@
     "tailwindcss": "^3.3.0",
     "typescript": "^5",
     "vite-tsconfig-paths": "^4.2.1",
-    "vitest": "^0.34.6",
-    "wrangler": "^4.54.0"
+    "vitest": "^0.34.6"
   },
   "pnpm": {
     "onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
