@@ -29,7 +29,23 @@ export default function Countdown(props: Props) {
   }, [props.nextRamadan]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!countdown) {
-    return <></>;
+    return (
+      <div className="bg-white shadow-lg rounded-lg p-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          {["Days", "Hours", "Minutes", "Seconds"].map((label) => (
+            <div key={label}>
+              <p className="text-2xl font-semibold text-gray-800">{label}</p>
+              <div className="flex justify-center mt-1">
+                <div className="w-20 h-16 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 rounded-lg animate-pulse" />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-center mt-6">
+          <div className="w-80 h-7 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 rounded-full animate-pulse" />
+        </div>
+      </div>
+    );
   }
 
   return (
