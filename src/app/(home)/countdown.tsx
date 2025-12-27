@@ -2,10 +2,37 @@
 
 import { createCountdown, type CreateCountdown } from "@/utils/countdown";
 import { useCallback, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Props {
   nextRamadan: Date;
 }
+
+const NumberBox = ({ value, label }: { value: number; label: string }) => {
+  const displayValue = value.toString().padStart(2, "0");
+
+  return (
+    <div className="flex flex-col items-center">
+      <p className="text-sm md:text-base font-medium text-emerald-100/70 uppercase tracking-widest mb-2">
+        {label}
+      </p>
+      <div className="relative h-16 md:h-20 flex items-center justify-center overflow-hidden">
+        <AnimatePresence mode="popLayout">
+          <motion.p
+            key={displayValue}
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -20, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="text-5xl md:text-7xl font-bold text-white tabular-nums tracking-tight drop-shadow-lg"
+          >
+            {displayValue}
+          </motion.p>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
 
 export default function Countdown(props: Props) {
   const [countdown, setCountdown] = useState<
@@ -48,25 +75,24 @@ export default function Countdown(props: Props) {
   }
 
   return (
-    <div className="w-full bg-emerald-900/10 backdrop-blur-xl border border-emerald-500/10 shadow-2xl rounded-3xl p-8 md:p-12 relative overflow-hidden ring-1 ring-emerald-500/10">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="w-full bg-emerald-900/10 backdrop-blur-xl border border-emerald-500/10 shadow-2xl rounded-3xl p-8 md:p-12 relative overflow-hidden ring-1 ring-emerald-500/10"
+    >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center relative z-10">
-        {[
-          { label: "Days", value: countdown.days },
-          { label: "Hours", value: countdown.hours },
-          { label: "Minutes", value: countdown.minutes },
-          { label: "Seconds", value: countdown.seconds },
-        ].map((item) => (
-          <div key={item.label} className="flex flex-col items-center">
-            <p className="text-sm md:text-base font-medium text-emerald-100/70 uppercase tracking-widest mb-2">
-              {item.label}
-            </p>
-            <p className="text-5xl md:text-7xl font-bold text-white tabular-nums tracking-tight drop-shadow-lg">
-              {item.value.toString().padStart(2, "0")}
-            </p>
-          </div>
-        ))}
+        <NumberBox value={countdown.days} label="Days" />
+        <NumberBox value={countdown.hours} label="Hours" />
+        <NumberBox value={countdown.minutes} label="Minutes" />
+        <NumberBox value={countdown.seconds} label="Seconds" />
       </div>
-      <div className="mt-12 text-center relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5, duration: 0.5 }}
+        className="mt-12 text-center relative z-10"
+      >
         <div className="inline-flex items-center px-6 py-3 rounded-full bg-emerald-900/20 border border-emerald-500/10 backdrop-blur-md">
           <p className="text-base md:text-lg text-emerald-50">
             Ramadan will, inshaAllah, be coming on{" "}
@@ -80,7 +106,7 @@ export default function Countdown(props: Props) {
             <span className="ml-2">🌙✨</span>
           </p>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
