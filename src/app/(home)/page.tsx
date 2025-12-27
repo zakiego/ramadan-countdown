@@ -71,16 +71,35 @@ export default async function Page() {
 
         <Countdown nextRamadan={api.ramadanStart} />
 
-        <div className="mt-12 opacity-60 hover:opacity-100 transition-opacity duration-300">
-          <p className="text-emerald-100/60 text-sm font-medium tracking-wide">
-            API available{" "}
-            <a
-              href="/api/countdown?timezoneOffset=8"
-              className="text-amber-200/80 hover:text-amber-100 underline decoration-amber-200/30 hover:decoration-amber-100 transition-colors"
-            >
-              here
-            </a>
-          </p>
+        <div className="mt-16 flex flex-col md:flex-row items-center gap-4 md:gap-6 opacity-40 hover:opacity-100 transition-opacity duration-500 text-[10px] tracking-[0.2em] uppercase font-medium text-center">
+          <a
+            href="https://x.com/ramadancountdn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-amber-200 transition-colors"
+          >
+            Twitter @ramadancountdn
+          </a>
+
+          <span className="hidden md:block text-emerald-100/20">/</span>
+
+          <a
+            href="/api/countdown?timezoneOffset=8"
+            className="hover:text-amber-200 transition-colors"
+          >
+            API
+          </a>
+
+          <span className="hidden md:block text-emerald-100/20">/</span>
+
+          <a
+            href="https://zakiego.com?utm_source=ramadan-countdown&utm_medium=footer&utm_campaign=ramadan_2025"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-amber-200 transition-colors"
+          >
+            Built by zakiego.com
+          </a>
         </div>
       </div>
     </div>
