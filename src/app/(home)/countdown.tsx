@@ -1,9 +1,7 @@
 "use client";
 
 import { createCountdown, type CreateCountdown } from "@/utils/countdown";
-import { useEffect, useState } from "react";
-
-export const dynamic = "force-dynamic";
+import { useCallback, useEffect, useState } from "react";
 
 interface Props {
   nextRamadan: Date;
@@ -14,19 +12,20 @@ export default function Countdown(props: Props) {
     CreateCountdown["countdown"] | null
   >(null);
 
-  const updateCountdown = () => {
-    const countdown = createCountdown({
+  const updateCountdown = useCallback(() => {
+    const timezoneOffset = -(new Date().getTimezoneOffset() / 60);
+    const result = createCountdown({
       nextRamadan: props.nextRamadan,
-      timezoneOffset: 8,
+      timezoneOffset,
     });
-    setCountdown(countdown.countdown);
-  };
+    setCountdown(result.countdown);
+  }, [props.nextRamadan]);
 
   useEffect(() => {
-    const interval = setInterval(updateCountdown, 1000); // Updates countdown every 1 second
-
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
     return () => clearInterval(interval);
-  }, [props.nextRamadan]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [updateCountdown]);
 
   if (!countdown) {
     return (
@@ -54,25 +53,25 @@ export default function Countdown(props: Props) {
         <div>
           <p className="text-2xl font-semibold text-gray-800 ">Days</p>
           <p className="text-6xl font-bold text-gray-800 tabular-nums">
-            {countdown?.days.toString().padStart(2, "0")}
+            {countdown.days.toString().padStart(2, "0")}
           </p>
         </div>
         <div>
           <p className="text-2xl font-semibold text-gray-800 ">Hours</p>
           <p className="text-6xl font-bold text-gray-800 tabular-nums">
-            {countdown?.hours.toString().padStart(2, "0")}
+            {countdown.hours.toString().padStart(2, "0")}
           </p>
         </div>
         <div>
           <p className="text-2xl font-semibold text-gray-800 ">Minutes</p>
           <p className="text-6xl font-bold text-gray-800 tabular-nums">
-            {countdown?.minutes.toString().padStart(2, "0")}
+            {countdown.minutes.toString().padStart(2, "0")}
           </p>
         </div>
         <div>
           <p className="text-2xl font-semibold text-gray-800 ">Seconds</p>
           <p className="text-6xl font-bold text-gray-800 tabular-nums">
-            {countdown?.seconds.toString().padStart(2, "0")}
+            {countdown.seconds.toString().padStart(2, "0")}
           </p>
         </div>
       </div>

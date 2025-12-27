@@ -1,5 +1,6 @@
 import { keystaticReader } from "@/utils/keystatic";
 import { sortBy } from "lodash";
+import { cache } from "react";
 import { z } from "zod";
 
 export const getHistory = async () => {
@@ -26,7 +27,7 @@ export const getHistory = async () => {
   return data;
 };
 
-export async function getNextRamadan() {
+export const getNextRamadan = cache(async () => {
   const data = await getHistory();
 
   // find the next ramadan
@@ -38,4 +39,4 @@ export async function getNextRamadan() {
   }
 
   return nextRamadan;
-}
+});
