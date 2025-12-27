@@ -29,62 +29,58 @@ export default function Countdown(props: Props) {
 
   if (!countdown) {
     return (
-      <div className="bg-white shadow-lg rounded-lg p-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+      <div className="w-full bg-emerald-900/10 backdrop-blur-xl border border-emerald-500/10 shadow-2xl rounded-3xl p-8 md:p-12 ring-1 ring-emerald-500/10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center">
           {["Days", "Hours", "Minutes", "Seconds"].map((label) => (
-            <div key={label}>
-              <p className="text-2xl font-semibold text-gray-800">{label}</p>
-              <div className="flex justify-center mt-1">
-                <div className="w-20 h-16 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 rounded-lg animate-pulse" />
-              </div>
+            <div key={label} className="flex flex-col items-center space-y-4">
+              <p className="text-sm md:text-base font-medium text-emerald-100/60 uppercase tracking-widest">
+                {label}
+              </p>
+              <div className="w-full h-16 md:h-20 bg-emerald-500/10 rounded-xl animate-pulse" />
             </div>
           ))}
         </div>
-        <div className="flex justify-center mt-6">
-          <div className="w-80 h-7 bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 rounded-full animate-pulse" />
+        <div className="flex justify-center mt-10">
+          <div className="w-64 h-8 bg-emerald-500/10 rounded-full animate-pulse" />
         </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-8">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-        <div>
-          <p className="text-2xl font-semibold text-gray-800 ">Days</p>
-          <p className="text-6xl font-bold text-gray-800 tabular-nums">
-            {countdown.days.toString().padStart(2, "0")}
-          </p>
-        </div>
-        <div>
-          <p className="text-2xl font-semibold text-gray-800 ">Hours</p>
-          <p className="text-6xl font-bold text-gray-800 tabular-nums">
-            {countdown.hours.toString().padStart(2, "0")}
-          </p>
-        </div>
-        <div>
-          <p className="text-2xl font-semibold text-gray-800 ">Minutes</p>
-          <p className="text-6xl font-bold text-gray-800 tabular-nums">
-            {countdown.minutes.toString().padStart(2, "0")}
-          </p>
-        </div>
-        <div>
-          <p className="text-2xl font-semibold text-gray-800 ">Seconds</p>
-          <p className="text-6xl font-bold text-gray-800 tabular-nums">
-            {countdown.seconds.toString().padStart(2, "0")}
+    <div className="w-full bg-emerald-900/10 backdrop-blur-xl border border-emerald-500/10 shadow-2xl rounded-3xl p-8 md:p-12 relative overflow-hidden ring-1 ring-emerald-500/10">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center relative z-10">
+        {[
+          { label: "Days", value: countdown.days },
+          { label: "Hours", value: countdown.hours },
+          { label: "Minutes", value: countdown.minutes },
+          { label: "Seconds", value: countdown.seconds },
+        ].map((item) => (
+          <div key={item.label} className="flex flex-col items-center">
+            <p className="text-sm md:text-base font-medium text-emerald-100/70 uppercase tracking-widest mb-2">
+              {item.label}
+            </p>
+            <p className="text-5xl md:text-7xl font-bold text-white tabular-nums tracking-tight drop-shadow-lg">
+              {item.value.toString().padStart(2, "0")}
+            </p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-12 text-center relative z-10">
+        <div className="inline-flex items-center px-6 py-3 rounded-full bg-emerald-900/20 border border-emerald-500/10 backdrop-blur-md">
+          <p className="text-base md:text-lg text-emerald-50">
+            Ramadan will, inshaAllah, be coming on{" "}
+            <span className="font-semibold text-amber-100">
+              {props.nextRamadan.toLocaleDateString("en-US", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </span>
+            <span className="ml-2">🌙✨</span>
           </p>
         </div>
       </div>
-      <p className="text-center text-lg text-gray-700 mt-6">
-        Ramadan will, inshaAllah, be coming on{" "}
-        {props.nextRamadan.toLocaleDateString("en-US", {
-          // weekday: "long",
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        })}{" "}
-        🌙✨
-      </p>
     </div>
   );
 }
