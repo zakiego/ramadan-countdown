@@ -52,7 +52,7 @@ export default async function Page() {
   };
 
   return (
-    <div className="relative flex flex-col items-center pt-20 md:pt-0 md:justify-center min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1a4a3e] via-[#0d2e26] to-[#051410] px-4 md:px-0 text-white overflow-hidden">
+    <div className="relative flex flex-col items-center pt-20 pb-10 md:pt-0 md:pb-0 md:justify-center min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1a4a3e] via-[#0d2e26] to-[#051410] px-4 md:px-0 text-white overflow-hidden">
       <script
         type="application/ld+json"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD
