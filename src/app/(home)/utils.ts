@@ -1,30 +1,10 @@
-import { keystaticReader } from "@/utils/keystatic";
+import { getAllRamadanData } from "@/utils/ramadan-data";
 import { sortBy } from "lodash";
 import { cache } from "react";
-import { z } from "zod";
 
 export const getHistory = async () => {
-  const rawData = await keystaticReader.collections.ramadan.all();
-
-  const schema = z.array(
-    z.object({
-      slug: z.coerce.number(),
-      entry: z.object({
-        year: z.coerce.number(),
-        ramadanStart: z.coerce.date(),
-        ramadanEnd: z.coerce.date(),
-        eidAlFitr: z.coerce.date(),
-      }),
-    }),
-  );
-
-  const parsed = schema.parse(rawData);
-  const data = sortBy(
-    parsed.map((r) => r.entry),
-    (ramadan) => ramadan.ramadanStart,
-  );
-
-  return data;
+  const data = getAllRamadanData();
+  return sortBy(data, (ramadan) => ramadan.ramadanStart);
 };
 
 export const getNextRamadan = cache(async () => {
@@ -38,5 +18,8 @@ export const getNextRamadan = cache(async () => {
     throw new Error("Could not find next ramadan");
   }
 
-  return nextRamadan;
+  return {
+    ...nextRamadan,
+    year: Number(nextRamadan.year),
+  };
 });
