@@ -35,4 +35,10 @@ export const ramadanData: RamadanData[] = [
     ramadanEnd: new Date("2026-03-19"),
     eidAlFitr: new Date("2026-03-20"),
   },
+  {
+    year: 2027,
+    ramadanStart: new Date("2027-02-07"),
+    ramadanEnd: new Date("2027-03-08"),
+    eidAlFitr: new Date("2027-03-09"),
+  },
 ];
