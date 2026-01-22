@@ -57,6 +57,7 @@ export default async function Page() {
   // Serialize dates for client component
   const ramadansForClient = ramadanData.map((r) => ({
     year: r.year,
+    hijriYear: r.hijriYear,
     ramadanStart: r.ramadanStart.toISOString(),
     ramadanEnd: r.ramadanEnd.toISOString(),
     eidAlFitr: r.eidAlFitr.toISOString(),

@@ -1,4 +1,5 @@
 import { ramadanData } from "@/data/ramadan";
+import { getRamadanState } from "@/utils/ramadan-state";
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -9,52 +10,28 @@ export async function GET(request: NextRequest) {
     .number()
     .parse(searchParams.get("timezoneOffset") || 7);
 
-  // is today ramadan check from history
+  // Apply timezone offset to current time
   const now = new Date();
   const nowWithTimezoneOffset = new Date(
-    now.getTime() + timezoneOffset * 60 * 60 * 1000
+    now.getTime() + timezoneOffset * 60 * 60 * 1000,
   );
 
-  const ramadanThisYear = ramadanData.find((ramadan) => {
-    return (
-      ramadan.ramadanStart.getFullYear() === nowWithTimezoneOffset.getFullYear()
-    );
-  });
+  const state = getRamadanState(ramadanData, nowWithTimezoneOffset);
 
-  if (!ramadanThisYear) {
-    return NextResponse.json({
-      error: "Could not find Ramadan data for this year",
-      isTodayRamadan: false,
-      repository: "https://github.com/zakiego/ramadan-countdown",
-    });
-  }
-
-  // To get the last hour of the last day of Ramadan
-  const ramadanEndWithLastHour = new Date(ramadanThisYear.ramadanEnd);
-  ramadanEndWithLastHour.setHours(23, 59, 59, 999);
-
-  const isTodayRamadan =
-    ramadanThisYear &&
-    nowWithTimezoneOffset >= ramadanThisYear.ramadanStart &&
-    nowWithTimezoneOffset <= ramadanEndWithLastHour;
-
-  if (!isTodayRamadan) {
-    return NextResponse.json({
-      isTodayRamadan,
-      repository: "https://github.com/zakiego/ramadan-countdown",
-    });
-  }
-
-  const daysElapsedSinceStart =
-    Math.floor(
-      (nowWithTimezoneOffset.getTime() -
-        ramadanThisYear.ramadanStart.getTime()) /
-        (1000 * 60 * 60 * 24)
-    ) + 1;
-
-  return NextResponse.json({
-    isTodayRamadan,
-    daysElapsedSinceStart,
+  const baseResponse = {
+    isTodayRamadan: state.type === "ramadan" || state.type === "lailatul_qadr",
+    status: state.type,
+    hijriYear: state.hijriYear,
     repository: "https://github.com/zakiego/ramadan-countdown",
-  });
+  };
+
+  if (state.type === "ramadan" || state.type === "lailatul_qadr") {
+    return NextResponse.json({
+      ...baseResponse,
+      daysElapsedSinceStart: state.day,
+      totalDays: state.totalDays,
+    });
+  }
+
+  return NextResponse.json(baseResponse);
 }

@@ -1,9 +1,9 @@
+import { DevDatePicker } from "@/components/DevDatePicker";
+import { DevDateProvider } from "@/context/DevDateContext";
 import type { Metadata } from "next";
+import type { Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import type { Viewport } from "next";
-import { DevDateProvider } from "@/context/DevDateContext";
-import { DevDatePicker } from "@/components/DevDatePicker";
 
 const inter = Inter({ subsets: ["latin"] });
 

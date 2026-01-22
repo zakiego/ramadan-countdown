@@ -1,5 +1,5 @@
 import { ramadanData } from "@/data/ramadan";
-import { createCountdown } from "@/utils/countdown";
+import { getRamadanState } from "@/utils/ramadan-state";
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
@@ -10,24 +10,51 @@ export async function GET(request: NextRequest) {
     .number()
     .parse(searchParams.get("timezoneOffset") || 7);
 
-  // Find next Ramadan based on current time
+  // Apply timezone offset to current time
   const now = new Date();
-  const nextRamadan = ramadanData.find((r) => r.ramadanStart > now);
+  const nowWithTimezoneOffset = new Date(
+    now.getTime() + timezoneOffset * 60 * 60 * 1000,
+  );
 
-  if (!nextRamadan) {
-    return NextResponse.json(
-      { error: "No upcoming Ramadan data available" },
-      { status: 404 }
-    );
-  }
+  const state = getRamadanState(ramadanData, nowWithTimezoneOffset);
 
-  const countdown = createCountdown({
-    nextRamadan: nextRamadan.ramadanStart,
+  // Format response based on state type
+  const baseResponse = {
+    status: state.type,
+    hijriYear: state.hijriYear,
     timezoneOffset,
-  });
-
-  return NextResponse.json({
-    ...countdown,
     repository: "https://github.com/zakiego/ramadan-countdown",
-  });
+  };
+
+  switch (state.type) {
+    case "countdown":
+      return NextResponse.json({
+        ...baseResponse,
+        countdown: state.countdown,
+        targetDate: state.targetRamadan.ramadanStart.toISOString(),
+        year: state.targetRamadan.year,
+      });
+
+    case "ramadan":
+    case "lailatul_qadr":
+      return NextResponse.json({
+        ...baseResponse,
+        day: state.day,
+        totalDays: state.totalDays,
+        year: state.currentRamadan.year,
+        ramadanStart: state.currentRamadan.ramadanStart.toISOString(),
+        ramadanEnd: state.currentRamadan.ramadanEnd.toISOString(),
+        eidAlFitr: state.currentRamadan.eidAlFitr.toISOString(),
+      });
+
+    case "eid":
+      return NextResponse.json({
+        ...baseResponse,
+        year: state.currentRamadan.year,
+        eidAlFitr: state.currentRamadan.eidAlFitr.toISOString(),
+      });
+
+    default:
+      return NextResponse.json({ error: "Unknown state" }, { status: 500 });
+  }
 }

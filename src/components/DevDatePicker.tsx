@@ -2,7 +2,7 @@
 
 import { useDevDate } from "@/context/DevDateContext";
 import { ramadanData } from "@/data/ramadan";
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 
 export function DevDatePicker() {
   const { simulatedDate, setSimulatedDate, isSimulating } = useDevDate();
@@ -28,12 +28,19 @@ export function DevDatePicker() {
         date: new Date(r.ramadanStart.getTime() - 7 * 24 * 60 * 60 * 1000),
       },
       {
-        label: "During Ramadan",
+        label: "Day 1 Ramadan",
+        description: "First day",
+        date: r.ramadanStart,
+      },
+      {
+        label: "Day 15 Ramadan",
         description: "Mid-Ramadan",
-        date: new Date(
-          r.ramadanStart.getTime() +
-            (r.ramadanEnd.getTime() - r.ramadanStart.getTime()) / 2
-        ),
+        date: new Date(r.ramadanStart.getTime() + 14 * 24 * 60 * 60 * 1000),
+      },
+      {
+        label: "Lailatul Qadr",
+        description: "Day 21 - Last 10 nights",
+        date: new Date(r.ramadanStart.getTime() + 20 * 24 * 60 * 60 * 1000),
       },
       {
         label: "Eid al-Fitr",
@@ -41,9 +48,9 @@ export function DevDatePicker() {
         date: r.eidAlFitr,
       },
       {
-        label: "After Ramadan",
-        description: "1 week after Eid",
-        date: new Date(r.eidAlFitr.getTime() + 7 * 24 * 60 * 60 * 1000),
+        label: "After Eid",
+        description: "1 day after Eid",
+        date: new Date(r.eidAlFitr.getTime() + 1 * 24 * 60 * 60 * 1000),
       },
     ];
   }, [relevantRamadan]);
@@ -55,7 +62,9 @@ export function DevDatePicker() {
 
   const formatDateTimeLocal = (date: Date) => {
     const pad = (n: number) => n.toString().padStart(2, "0");
-    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
+      date.getDate(),
+    )}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
   };
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,6 +100,7 @@ export function DevDatePicker() {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
+          aria-hidden="true"
         >
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
           <line x1="16" y1="2" x2="16" y2="6" />
@@ -115,6 +125,7 @@ export function DevDatePicker() {
           type="button"
           onClick={() => setIsMinimized(true)}
           className="p-1 text-gray-400 hover:text-white transition-colors"
+          aria-label="Minimize date picker"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -126,6 +137,7 @@ export function DevDatePicker() {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
           >
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
@@ -175,7 +187,7 @@ export function DevDatePicker() {
           <div className="text-xs text-gray-400 mb-2">
             Quick Presets ({relevantRamadan.year})
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             {presets.map((preset) => (
               <button
                 key={preset.label}
