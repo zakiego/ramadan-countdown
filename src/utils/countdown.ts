@@ -1,11 +1,14 @@
 export function createCountdown({
   nextRamadan,
   timezoneOffset,
+  currentDate: providedDate,
 }: {
   nextRamadan: Date;
   timezoneOffset: number;
+  /** Optional: Override the current date (for dev testing) */
+  currentDate?: Date;
 }) {
-  const currentDate = new Date();
+  const currentDate = providedDate ?? new Date();
   const currentDateWithTimezoneOffset = new Date(
     currentDate.getTime() + timezoneOffset * 60 * 60 * 1000,
   );

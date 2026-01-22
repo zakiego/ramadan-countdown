@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import type { Viewport } from "next";
+import { DevDateProvider } from "@/context/DevDateContext";
+import { DevDatePicker } from "@/components/DevDatePicker";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,7 +53,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <DevDateProvider>
+          {children}
+          <DevDatePicker />
+        </DevDateProvider>
+      </body>
     </html>
   );
 }

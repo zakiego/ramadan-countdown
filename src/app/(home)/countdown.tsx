@@ -1,6 +1,7 @@
 "use client";
 
 import { createCountdown, type CreateCountdown } from "@/utils/countdown";
+import { useDevDate } from "@/context/DevDateContext";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -42,19 +43,22 @@ const NumberBox = ({ value, label }: { value: number; label: string }) => {
 };
 
 export default function Countdown(props: Props) {
+  const { getCurrentDate, simulatedDate } = useDevDate();
   const [countdown, setCountdown] = useState<
     CreateCountdown["countdown"] | null
   >(null);
 
   // Determine the next Ramadan on the client side based on current date
+  // Note: simulatedDate triggers re-render, getCurrentDate returns the correct date
   const nextRamadan = useMemo(() => {
-    const now = new Date();
+    const now = getCurrentDate();
     const ramadan = props.ramadans.find(
       (r) => new Date(r.ramadanStart) > now
     );
     // If no future Ramadan found, use the last one in the list
     return ramadan ?? props.ramadans[props.ramadans.length - 1];
-  }, [props.ramadans]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.ramadans, simulatedDate]);
 
   const nextRamadanDate = useMemo(
     () => new Date(nextRamadan.ramadanStart),
@@ -62,13 +66,15 @@ export default function Countdown(props: Props) {
   );
 
   const updateCountdown = useCallback(() => {
-    const timezoneOffset = -(new Date().getTimezoneOffset() / 60);
+    const now = getCurrentDate();
+    const timezoneOffset = -(now.getTimezoneOffset() / 60);
     const result = createCountdown({
       nextRamadan: nextRamadanDate,
       timezoneOffset,
+      currentDate: now,
     });
     setCountdown(result.countdown);
-  }, [nextRamadanDate]);
+  }, [nextRamadanDate, getCurrentDate]);
 
   useEffect(() => {
     updateCountdown();
