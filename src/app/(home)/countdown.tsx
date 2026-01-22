@@ -1,11 +1,18 @@
 "use client";
 
 import { createCountdown, type CreateCountdown } from "@/utils/countdown";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+interface RamadanClientData {
+  year: number;
+  ramadanStart: string;
+  ramadanEnd: string;
+  eidAlFitr: string;
+}
+
 interface Props {
-  nextRamadan: Date;
+  ramadans: RamadanClientData[];
 }
 
 const NumberBox = ({ value, label }: { value: number; label: string }) => {
@@ -39,14 +46,29 @@ export default function Countdown(props: Props) {
     CreateCountdown["countdown"] | null
   >(null);
 
+  // Determine the next Ramadan on the client side based on current date
+  const nextRamadan = useMemo(() => {
+    const now = new Date();
+    const ramadan = props.ramadans.find(
+      (r) => new Date(r.ramadanStart) > now
+    );
+    // If no future Ramadan found, use the last one in the list
+    return ramadan ?? props.ramadans[props.ramadans.length - 1];
+  }, [props.ramadans]);
+
+  const nextRamadanDate = useMemo(
+    () => new Date(nextRamadan.ramadanStart),
+    [nextRamadan]
+  );
+
   const updateCountdown = useCallback(() => {
     const timezoneOffset = -(new Date().getTimezoneOffset() / 60);
     const result = createCountdown({
-      nextRamadan: props.nextRamadan,
+      nextRamadan: nextRamadanDate,
       timezoneOffset,
     });
     setCountdown(result.countdown);
-  }, [props.nextRamadan]);
+  }, [nextRamadanDate]);
 
   useEffect(() => {
     updateCountdown();
@@ -97,7 +119,7 @@ export default function Countdown(props: Props) {
           <p className="text-base md:text-lg text-emerald-50">
             Ramadan will, inshaAllah, be coming on{" "}
             <span className="font-semibold text-amber-100">
-              {props.nextRamadan.toLocaleDateString("en-US", {
+              {nextRamadanDate.toLocaleDateString("en-US", {
                 day: "numeric",
                 month: "long",
                 year: "numeric",

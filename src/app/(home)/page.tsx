@@ -1,10 +1,11 @@
 import Countdown from "@/app/(home)/countdown";
-import { getNextRamadan } from "@/app/(home)/utils";
-
-export const dynamic = "force-dynamic";
+import { getFutureRamadans } from "@/app/(home)/utils";
+import { ramadanData } from "@/data/ramadan";
 
 export async function generateMetadata() {
-  const api = await getNextRamadan();
+  const futureRamadans = getFutureRamadans();
+  // Use first future Ramadan for SEO, fallback to last known Ramadan
+  const api = futureRamadans[0] ?? ramadanData[ramadanData.length - 1];
 
   const title = `Ramadan Countdown ${api.year}`;
   const description = `Count down to Ramadan ${api.year}. Find out exactly how many days, hours, minutes, and seconds are left until the holy month begins.`;
@@ -35,7 +36,9 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const api = await getNextRamadan();
+  const futureRamadans = getFutureRamadans();
+  // Use first future Ramadan for SEO, fallback to last known Ramadan
+  const api = futureRamadans[0] ?? ramadanData[ramadanData.length - 1];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -50,6 +53,14 @@ export default async function Page() {
       name: "Zakiyuddin Munziri",
     },
   };
+
+  // Serialize dates for client component
+  const ramadansForClient = ramadanData.map((r) => ({
+    year: r.year,
+    ramadanStart: r.ramadanStart.toISOString(),
+    ramadanEnd: r.ramadanEnd.toISOString(),
+    eidAlFitr: r.eidAlFitr.toISOString(),
+  }));
 
   return (
     <div className="relative flex flex-col items-center pt-20 pb-10 md:pt-0 md:pb-0 md:justify-center min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1a4a3e] via-[#0d2e26] to-[#051410] px-4 md:px-0 text-white overflow-hidden">
@@ -69,7 +80,7 @@ export default async function Page() {
           Ramadan Countdown
         </h1>
 
-        <Countdown nextRamadan={api.ramadanStart} />
+        <Countdown ramadans={ramadansForClient} />
 
         <div className="mt-16 flex flex-col md:flex-row items-center gap-4 md:gap-6 opacity-40 hover:opacity-100 transition-opacity duration-500 text-[10px] tracking-[0.2em] uppercase font-medium text-center">
           <a

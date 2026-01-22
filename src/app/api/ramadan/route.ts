@@ -1,8 +1,6 @@
-import { getHistory, getNextRamadan } from "@/app/(home)/utils";
+import { ramadanData } from "@/data/ramadan";
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-
-export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -11,22 +9,24 @@ export async function GET(request: NextRequest) {
     .number()
     .parse(searchParams.get("timezoneOffset") || 7);
 
-  const history = await getHistory();
-
   // is today ramadan check from history
   const now = new Date();
   const nowWithTimezoneOffset = new Date(
-    now.getTime() + timezoneOffset * 60 * 60 * 1000,
+    now.getTime() + timezoneOffset * 60 * 60 * 1000
   );
 
-  const ramadanThisYear = history.find((ramadan) => {
+  const ramadanThisYear = ramadanData.find((ramadan) => {
     return (
       ramadan.ramadanStart.getFullYear() === nowWithTimezoneOffset.getFullYear()
     );
   });
 
   if (!ramadanThisYear) {
-    throw new Error("Could not find current ramadan");
+    return NextResponse.json({
+      error: "Could not find Ramadan data for this year",
+      isTodayRamadan: false,
+      repository: "https://github.com/zakiego/ramadan-countdown",
+    });
   }
 
   // To get the last hour of the last day of Ramadan
@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
     Math.floor(
       (nowWithTimezoneOffset.getTime() -
         ramadanThisYear.ramadanStart.getTime()) /
-        (1000 * 60 * 60 * 24),
+        (1000 * 60 * 60 * 24)
     ) + 1;
 
   return NextResponse.json({

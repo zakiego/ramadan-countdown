@@ -1,42 +1,20 @@
-import { keystaticReader } from "@/utils/keystatic";
-import { sortBy } from "lodash";
-import { cache } from "react";
-import { z } from "zod";
+import { type RamadanData, ramadanData } from "@/data/ramadan";
 
-export const getHistory = async () => {
-  const rawData = await keystaticReader.collections.ramadan.all();
-
-  const schema = z.array(
-    z.object({
-      slug: z.coerce.number(),
-      entry: z.object({
-        year: z.coerce.number(),
-        ramadanStart: z.coerce.date(),
-        ramadanEnd: z.coerce.date(),
-        eidAlFitr: z.coerce.date(),
-      }),
-    }),
-  );
-
-  const parsed = schema.parse(rawData);
-  const data = sortBy(
-    parsed.map((r) => r.entry),
-    (ramadan) => ramadan.ramadanStart,
-  );
-
-  return data;
+export const getHistory = (): RamadanData[] => {
+  return ramadanData;
 };
 
-export const getNextRamadan = cache(async () => {
-  const data = await getHistory();
-
-  // find the next ramadan
+export const getFutureRamadans = (): RamadanData[] => {
   const now = new Date();
-  const nextRamadan = data.find((ramadan) => ramadan.ramadanStart > now);
+  // Return Ramadans that haven't ended yet (includes current Ramadan if ongoing)
+  return ramadanData.filter((r) => r.ramadanEnd > now);
+};
 
-  if (!nextRamadan) {
-    throw new Error("Could not find next ramadan");
+export const getNextRamadan = (): RamadanData => {
+  const now = new Date();
+  const next = ramadanData.find((r) => r.ramadanStart > now);
+  if (!next) {
+    throw new Error("No upcoming Ramadan data available");
   }
-
-  return nextRamadan;
-});
+  return next;
+};
