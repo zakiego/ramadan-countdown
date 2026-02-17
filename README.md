@@ -7,7 +7,7 @@
   </a>
 </p>
 
-This is a simple countdown app for Ramadan. It is built using [Next.js](https://nextjs.org/) and [Keystatic](https://keystatic.com/).
+This is a simple countdown app for Ramadan. It is built using [Next.js](https://nextjs.org/).
 
 ## API
 

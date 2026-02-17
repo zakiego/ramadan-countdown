@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Ramadan Countdown is a Next.js 14 application that provides a countdown to the next Ramadan. It uses Keystatic as a headless CMS, storing data locally in `public/content/ramadan/` as JSON files.
+Ramadan Countdown is a Next.js 14 application that provides a countdown to the next Ramadan. Ramadan dates are stored directly in TypeScript code at `src/data/ramadan.ts`.
 
 ## Setup & Development
 
@@ -22,7 +22,7 @@ Ramadan Countdown is a Next.js 14 application that provides a countdown to the n
 - **Conventions**:
   - Use App Router (files in `src/app`).
   - Keep logic in `utils.ts` or `src/utils`.
-  - Content schemas are defined in `keystatic.config.ts`.
+  - Data types are defined in `src/data/ramadan.ts`.
   - Prefer functional components and React Hooks.
 
 ## Testing
@@ -33,9 +33,9 @@ Ramadan Countdown is a Next.js 14 application that provides a countdown to the n
 
 ## Data Structure
 
-- Ramadan data is stored in `public/content/ramadan/`.
-- Each year has a `.json` file for structured data and a `.mdoc` file for notes.
-- Schema is managed via Keystatic in `keystatic.config.ts`.
+- Ramadan data is stored in `src/data/ramadan.ts` as a TypeScript array.
+- Each entry contains: year, hijriYear, ramadanStart, ramadanEnd, and eidAlFitr dates.
+- To add a new year, simply add a new entry to the `ramadanData` array.
 
 ## API Endpoints
 

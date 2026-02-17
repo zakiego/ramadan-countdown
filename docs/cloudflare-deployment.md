@@ -42,7 +42,7 @@ This will:
 
 ### Static Data Loading
 
-Since Cloudflare Workers don't support Node.js file system APIs, Ramadan data is loaded via static imports instead of the Keystatic reader:
+Ramadan data is loaded via static imports from the TypeScript data file:
 
 - Data files: `public/content/ramadan/*.json`
 - Static loader: `src/utils/ramadan-data.ts`
@@ -70,13 +70,13 @@ To add a new Ramadan year (e.g., 2027):
    const rawData = [ramadan2023, ramadan2024, ramadan2025, ramadan2026, ramadan2027];
    ```
 
-### Keystatic Admin
+### Content Management
 
-The Keystatic admin UI (`/keystatic`) is disabled in production because it requires Node.js file system APIs. To manage content:
+To manage Ramadan dates:
 
-1. Run the development server locally: `pnpm dev`
-2. Access the admin at http://localhost:3000/keystatic
-3. Make changes and commit the JSON files to the repository
+1. Edit the `ramadanData` array in `src/data/ramadan.ts`
+2. Add or update entries with the correct dates
+3. Commit and push changes to trigger redeployment
 
 ## Troubleshooting
 
