@@ -59,7 +59,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   return (
-    <div className="relative flex flex-col items-center pt-20 pb-10 md:pt-0 md:pb-0 md:justify-center min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#1a4a3e] via-[#0d2e26] to-[#051410] px-4 md:px-0 text-white overflow-hidden">
+    <div className="relative flex flex-col items-center pt-20 pb-10 md:pt-0 md:pb-0 md:justify-center min-h-screen bg-radial-[ellipse_at_top] from-[#1a4a3e] via-[#0d2e26] to-[#051410] px-4 md:px-0 text-white overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-600/10 rounded-full blur-[120px] animate-float" />
