@@ -1,5 +1,14 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.6.1/schema.json",
+  "files": {
+    "ignore": [
+      "node_modules",
+      "dist",
+      ".wrangler",
+      "src/routeTree.gen.ts",
+      "worker-configuration.d.ts"
+    ]
+  },
   "organizeImports": {
     "enabled": true
   },

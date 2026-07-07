@@ -1,5 +1,3 @@
-"use client";
-
 import { useDevDate } from "@/context/DevDateContext";
 import { ramadanData } from "@/data/ramadan";
 import { useMemo, useState } from "react";
@@ -56,7 +54,7 @@ export function DevDatePicker() {
   }, [relevantRamadan]);
 
   // Only render in development - must be after all hooks
-  if (process.env.NODE_ENV !== "development") {
+  if (!import.meta.env.DEV) {
     return null;
   }
 
