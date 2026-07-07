@@ -1,5 +1,3 @@
-"use client";
-
 import { useDevDate } from "@/context/DevDateContext";
 import type { RamadanData } from "@/data/ramadan";
 import {
@@ -7,18 +5,10 @@ import {
   getRamadanState,
 } from "@/utils/ramadan-state";
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useEffect, useMemo, useState } from "react";
-
-interface RamadanClientData {
-  year: number;
-  hijriYear: string;
-  ramadanStart: string;
-  ramadanEnd: string;
-  eidAlFitr: string;
-}
+import { useCallback, useEffect, useState } from "react";
 
 interface Props {
-  ramadans: RamadanClientData[];
+  ramadans: RamadanData[];
 }
 
 const NumberBox = ({ value, label }: { value: number; label: string }) => {
@@ -293,24 +283,11 @@ export default function Countdown(props: Props) {
   const { getCurrentDate, simulatedDate } = useDevDate();
   const [state, setState] = useState<RamadanDisplayState | null>(null);
 
-  // Convert client data to RamadanData format
-  const ramadanDataList: RamadanData[] = useMemo(
-    () =>
-      props.ramadans.map((r) => ({
-        year: r.year,
-        hijriYear: r.hijriYear,
-        ramadanStart: new Date(r.ramadanStart),
-        ramadanEnd: new Date(r.ramadanEnd),
-        eidAlFitr: new Date(r.eidAlFitr),
-      })),
-    [props.ramadans],
-  );
-
   const updateState = useCallback(() => {
     const now = getCurrentDate();
-    const newState = getRamadanState(ramadanDataList, now);
+    const newState = getRamadanState(props.ramadans, now);
     setState(newState);
-  }, [ramadanDataList, getCurrentDate]);
+  }, [props.ramadans, getCurrentDate]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: simulatedDate is used to trigger re-render when dev date changes
   useEffect(() => {

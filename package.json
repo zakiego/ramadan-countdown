@@ -3,37 +3,38 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "sideEffects": false,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "build:worker": "npx @opennextjs/cloudflare build",
-    "start": "next start",
-    "lint": "next lint",
-    "preview": "pnpm build:worker && wrangler dev",
-    "deploy": "pnpm build:worker && wrangler deploy"
+    "dev": "vite dev",
+    "build": "vite build && tsc --noEmit",
+    "preview": "vite preview",
+    "deploy": "pnpm run build && wrangler deploy",
+    "cf-typegen": "wrangler types",
+    "test": "vitest run",
+    "lint": "biome check ."
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
+    "@tanstack/react-router": "^1.170.17",
+    "@tanstack/react-start": "^1.168.27",
     "framer-motion": "^12.23.26",
-    "next": "^16",
     "react": "^19",
     "react-dom": "^19",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@biomejs/biome": "1.6.1",
-    "@opennextjs/cloudflare": "^1.16.5",
-    "@types/node": "^20",
+    "@cloudflare/vite-plugin": "^1.29.0",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/node": "^22.5.4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^9",
-    "eslint-config-next": "^16",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5",
-    "vite-tsconfig-paths": "^4.2.1",
-    "vitest": "^0.34.6",
-    "wrangler": "^4.58.0"
+    "@vitejs/plugin-react": "^6.0.1",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.14",
+    "vitest": "^4.0.8",
+    "wrangler": "^4.74.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": ["@biomejs/biome", "esbuild", "workerd", "sharp"]
