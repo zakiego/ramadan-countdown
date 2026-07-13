@@ -11,8 +11,8 @@ export function CountdownSkeleton() {
           </div>
         ))}
       </div>
-      <div className="flex justify-center mt-10">
-        <div className="w-64 h-8 bg-emerald-500/10 rounded-full animate-pulse" />
+      <div className="flex justify-center mt-12">
+        <div className="w-72 h-[50px] md:h-[54px] bg-emerald-500/10 rounded-full animate-pulse" />
       </div>
     </div>
   );
