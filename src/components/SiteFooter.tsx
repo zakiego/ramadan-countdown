@@ -1,21 +1,24 @@
+import { type PageKey, localeLinkProps } from "@/i18n/config";
+import { useI18n } from "@/i18n/context";
 import { Link } from "@tanstack/react-router";
 
 /**
- * Shared footer. `internalLink` cross-links the two pages, which also gives
- * crawlers a plain HTML path between them.
+ * Shared footer. Cross-links to the other page (in the active locale), which
+ * also gives crawlers a plain HTML path between them.
  */
-export function SiteFooter({
-  internalLink,
-}: {
-  internalLink: { to: "/" | "/eid"; label: string };
-}) {
+export function SiteFooter({ page }: { page: PageKey }) {
+  const { ui, locale } = useI18n();
+  const otherPage: PageKey = page === "eid" ? "home" : "eid";
+  const otherLabel =
+    otherPage === "eid" ? ui.footerEidCountdown : ui.footerRamadanCountdown;
+
   return (
     <div className="mt-16 flex flex-col md:flex-row items-center gap-4 md:gap-6 opacity-40 hover:opacity-100 transition-opacity duration-200 text-[10px] tracking-[0.2em] uppercase font-medium text-center">
       <Link
-        to={internalLink.to}
+        {...localeLinkProps(locale, otherPage)}
         className="hover:text-amber-200 transition-colors"
       >
-        {internalLink.label}
+        {otherLabel}
       </Link>
 
       <span className="hidden md:block text-emerald-100/20">/</span>
@@ -35,7 +38,7 @@ export function SiteFooter({
         href="/api/countdown?timezoneOffset=8"
         className="hover:text-amber-200 transition-colors"
       >
-        API
+        {ui.footerApi}
       </a>
 
       <span className="hidden md:block text-emerald-100/20">/</span>
@@ -46,7 +49,7 @@ export function SiteFooter({
         rel="noopener noreferrer"
         className="hover:text-amber-200 transition-colors"
       >
-        Built by zakiego.com
+        {ui.footerBuiltBy}
       </a>
     </div>
   );

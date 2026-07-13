@@ -2,6 +2,7 @@ import { CountdownSkeleton } from "@/components/CountdownSkeleton";
 import { NumberBox } from "@/components/NumberBox";
 import { useDevDate } from "@/context/DevDateContext";
 import type { RamadanData } from "@/data/ramadan";
+import { useI18n } from "@/i18n/context";
 import {
   type RamadanDisplayState,
   getRamadanState,
@@ -21,6 +22,8 @@ function CountdownDisplay({
   state: Extract<RamadanDisplayState, { type: "countdown" }>;
   targetDate: Date;
 }) {
+  const { ui, fmt } = useI18n();
+  const coming = ui.ramadanComingOn(state.hijriYear);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -29,20 +32,24 @@ function CountdownDisplay({
       className="w-full bg-emerald-900/10 backdrop-blur-xl border border-emerald-500/10 shadow-2xl rounded-3xl p-8 md:p-12 relative overflow-hidden ring-1 ring-emerald-500/10"
     >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center relative z-10">
-        <NumberBox value={state.countdown.days} label="Days" enterDelay={0} />
+        <NumberBox
+          value={state.countdown.days}
+          label={ui.days}
+          enterDelay={0}
+        />
         <NumberBox
           value={state.countdown.hours}
-          label="Hours"
+          label={ui.hours}
           enterDelay={0.05}
         />
         <NumberBox
           value={state.countdown.minutes}
-          label="Minutes"
+          label={ui.minutes}
           enterDelay={0.1}
         />
         <NumberBox
           value={state.countdown.seconds}
-          label="Seconds"
+          label={ui.seconds}
           enterDelay={0.15}
         />
       </div>
@@ -54,17 +61,11 @@ function CountdownDisplay({
       >
         <div className="inline-flex items-center px-6 py-3 rounded-full bg-emerald-900/20 border border-emerald-500/10 backdrop-blur-md">
           <p className="text-base md:text-lg text-emerald-50">
-            Ramadan {state.hijriYear} will, inshaAllah, be coming on{" "}
+            {coming.before}
             <span className="font-semibold text-amber-100">
-              {targetDate.toLocaleDateString("en-US", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-                // Dates are stored as UTC midnight; format in UTC so users in
-                // negative-offset timezones don't see the previous calendar day
-                timeZone: "UTC",
-              })}
+              {fmt.short(targetDate)}
             </span>
+            {coming.after}
           </p>
         </div>
       </motion.div>
@@ -78,6 +79,7 @@ function RamadanDisplay({
 }: {
   state: Extract<RamadanDisplayState, { type: "ramadan" }>;
 }) {
+  const { ui } = useI18n();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -91,7 +93,7 @@ function RamadanDisplay({
           animate={{ opacity: 1, y: 0 }}
           className="text-lg md:text-xl text-emerald-100/70 uppercase tracking-widest mb-4"
         >
-          Ramadan {state.hijriYear}
+          {ui.ramadanLabel(state.hijriYear)}
         </motion.p>
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
@@ -112,7 +114,7 @@ function RamadanDisplay({
           transition={{ delay: 0.3 }}
           className="mt-6 text-xl md:text-2xl text-emerald-50"
         >
-          Day of Ramadan
+          {ui.dayOfRamadan}
         </motion.p>
       </div>
     </motion.div>
@@ -125,6 +127,7 @@ function LailatulQadrDisplay({
 }: {
   state: Extract<RamadanDisplayState, { type: "lailatul_qadr" }>;
 }) {
+  const { ui } = useI18n();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -147,7 +150,7 @@ function LailatulQadrDisplay({
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 border border-amber-500/30 mb-6"
         >
           <span className="text-amber-200 text-sm md:text-base font-medium tracking-wide">
-            Lailatul Qadr Period
+            {ui.lailatulQadrPeriod}
           </span>
         </motion.div>
         <motion.p
@@ -155,7 +158,7 @@ function LailatulQadrDisplay({
           animate={{ opacity: 1, y: 0 }}
           className="text-lg md:text-xl text-emerald-100/70 uppercase tracking-widest mb-4"
         >
-          Ramadan {state.hijriYear}
+          {ui.ramadanLabel(state.hijriYear)}
         </motion.p>
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
@@ -176,7 +179,7 @@ function LailatulQadrDisplay({
           transition={{ delay: 0.3 }}
           className="mt-6 text-xl md:text-2xl text-emerald-50"
         >
-          Day of Ramadan
+          {ui.dayOfRamadan}
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
@@ -184,7 +187,7 @@ function LailatulQadrDisplay({
           transition={{ delay: 0.5 }}
           className="mt-3 text-base text-amber-200/80 italic"
         >
-          &quot;The Night of Decree is better than a thousand months&quot;
+          {ui.nightOfDecreeQuote}
         </motion.p>
       </div>
     </motion.div>
@@ -197,6 +200,7 @@ function EidDisplay({
 }: {
   state: Extract<RamadanDisplayState, { type: "eid" }>;
 }) {
+  const { ui } = useI18n();
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
@@ -226,7 +230,7 @@ function EidDisplay({
           transition={{ delay: 0.3 }}
           className="text-5xl md:text-7xl font-bold text-amber-100 drop-shadow-lg mb-4"
         >
-          Eid Mubarak!
+          {ui.eidMubarak}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -234,7 +238,7 @@ function EidDisplay({
           transition={{ delay: 0.5 }}
           className="text-xl md:text-2xl text-emerald-50"
         >
-          1 Syawal {state.hijriYear}
+          {ui.shawwal(state.hijriYear)}
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
@@ -242,7 +246,7 @@ function EidDisplay({
           transition={{ delay: 0.7 }}
           className="mt-6 text-base md:text-lg text-amber-200/80"
         >
-          Taqabbalallahu minna wa minkum
+          {ui.taqabbal}
         </motion.p>
       </div>
     </motion.div>

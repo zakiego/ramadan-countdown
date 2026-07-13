@@ -1,15 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ramadan.zakiego.com</loc>
     <lastmod>2026-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ramadan.zakiego.com"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ramadan.zakiego.com/ar"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ramadan.zakiego.com/es"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ramadan.zakiego.com/hi"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ramadan.zakiego.com/zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ramadan.zakiego.com"/>
+  </url>
+  <url>
+    <loc>https://ramadan.zakiego.com/ar</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ramadan.zakiego.com"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ramadan.zakiego.com/ar"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ramadan.zakiego.com/es"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ramadan.zakiego.com/hi"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ramadan.zakiego.com/zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ramadan.zakiego.com"/>
+  </url>
+  <url>
+    <loc>https://ramadan.zakiego.com/es</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ramadan.zakiego.com"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ramadan.zakiego.com/ar"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ramadan.zakiego.com/es"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ramadan.zakiego.com/hi"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ramadan.zakiego.com/zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ramadan.zakiego.com"/>
+  </url>
+  <url>
+    <loc>https://ramadan.zakiego.com/hi</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ramadan.zakiego.com"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ramadan.zakiego.com/ar"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ramadan.zakiego.com/es"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ramadan.zakiego.com/hi"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ramadan.zakiego.com/zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ramadan.zakiego.com"/>
+  </url>
+  <url>
+    <loc>https://ramadan.zakiego.com/zh</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ramadan.zakiego.com"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ramadan.zakiego.com/ar"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ramadan.zakiego.com/es"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ramadan.zakiego.com/hi"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ramadan.zakiego.com/zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ramadan.zakiego.com"/>
   </url>
   <url>
     <loc>https://ramadan.zakiego.com/eid</loc>
     <lastmod>2026-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ramadan.zakiego.com/eid"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ramadan.zakiego.com/ar/eid"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ramadan.zakiego.com/es/eid"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ramadan.zakiego.com/hi/eid"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ramadan.zakiego.com/zh/eid"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ramadan.zakiego.com/eid"/>
+  </url>
+  <url>
+    <loc>https://ramadan.zakiego.com/ar/eid</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ramadan.zakiego.com/eid"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ramadan.zakiego.com/ar/eid"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ramadan.zakiego.com/es/eid"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ramadan.zakiego.com/hi/eid"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ramadan.zakiego.com/zh/eid"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ramadan.zakiego.com/eid"/>
+  </url>
+  <url>
+    <loc>https://ramadan.zakiego.com/es/eid</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ramadan.zakiego.com/eid"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ramadan.zakiego.com/ar/eid"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ramadan.zakiego.com/es/eid"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ramadan.zakiego.com/hi/eid"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ramadan.zakiego.com/zh/eid"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ramadan.zakiego.com/eid"/>
+  </url>
+  <url>
+    <loc>https://ramadan.zakiego.com/hi/eid</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ramadan.zakiego.com/eid"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ramadan.zakiego.com/ar/eid"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ramadan.zakiego.com/es/eid"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ramadan.zakiego.com/hi/eid"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ramadan.zakiego.com/zh/eid"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ramadan.zakiego.com/eid"/>
+  </url>
+  <url>
+    <loc>https://ramadan.zakiego.com/zh/eid</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ramadan.zakiego.com/eid"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ramadan.zakiego.com/ar/eid"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ramadan.zakiego.com/es/eid"/>
+    <xhtml:link rel="alternate" hreflang="hi" href="https://ramadan.zakiego.com/hi/eid"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://ramadan.zakiego.com/zh/eid"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ramadan.zakiego.com/eid"/>
   </url>
 </urlset>

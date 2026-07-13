@@ -1,5 +1,6 @@
 import type { RamadanData } from "@/data/ramadan";
-import { daysBetweenUtc, formatShortDate } from "@/utils/seo";
+import { useI18n } from "@/i18n/context";
+import { daysBetweenUtc } from "@/utils/date";
 
 /**
  * Upcoming Ramadan and Eid dates, server-rendered as a plain table so
@@ -12,6 +13,7 @@ export function DatesTable({
   ramadans: RamadanData[];
   now: Date;
 }) {
+  const { ui, fmt } = useI18n();
   const rows = ramadans.filter((r) => daysBetweenUtc(now, r.eidAlFitr) >= 0);
   if (rows.length === 0) {
     return null;
@@ -23,15 +25,15 @@ export function DatesTable({
       className="relative z-10 w-full max-w-2xl mx-auto mt-16 md:mt-20"
     >
       <h2 className="text-2xl md:text-3xl font-bold font-serif text-amber-100 text-center mb-8">
-        Ramadan dates by year
+        {ui.datesTableHeading}
       </h2>
       <table className="w-full text-left text-sm md:text-base">
         <thead>
           <tr className="text-xs uppercase tracking-widest text-emerald-100/50">
-            <th className="py-3 pr-4 font-medium">Year</th>
-            <th className="py-3 pr-4 font-medium">First day of fasting</th>
-            <th className="py-3 pr-4 font-medium">Eid al-Fitr</th>
-            <th className="py-3 font-medium">Hijri year</th>
+            <th className="py-3 pr-4 font-medium">{ui.colYear}</th>
+            <th className="py-3 pr-4 font-medium">{ui.colFirstDay}</th>
+            <th className="py-3 pr-4 font-medium">{ui.colEid}</th>
+            <th className="py-3 font-medium">{ui.colHijri}</th>
           </tr>
         </thead>
         <tbody>
@@ -41,10 +43,10 @@ export function DatesTable({
                 {r.year}
               </td>
               <td className="py-3 pr-4 text-emerald-100/80">
-                {formatShortDate(r.ramadanStart)}
+                {fmt.short(r.ramadanStart)}
               </td>
               <td className="py-3 pr-4 text-emerald-100/80">
-                {formatShortDate(r.eidAlFitr)}
+                {fmt.short(r.eidAlFitr)}
               </td>
               <td className="py-3 text-emerald-100/60">{r.hijriYear}</td>
             </tr>
@@ -52,10 +54,8 @@ export function DatesTable({
         </tbody>
       </table>
       <p className="mt-4 text-xs md:text-sm text-emerald-100/50 leading-relaxed">
-        Dates follow the Umm al-Qura astronomical calendar and can shift by a
-        day with the official moon sighting in your country.
-        {rows.some((r) => r.year === 2030) &&
-          " 2030 is a rare double year: a second Ramadan (1452 AH) is expected to begin around December 26, 2030."}
+        {ui.datesTableNote}
+        {rows.some((r) => r.year === 2030) && ` ${ui.datesTable2030Note}`}
       </p>
     </section>
   );

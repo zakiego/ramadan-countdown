@@ -1,7 +1,14 @@
 import { DevDatePicker } from "@/components/DevDatePicker";
 import { DevDateProvider } from "@/context/DevDateContext";
+import { LOCALE_META, localeFromPathname } from "@/i18n/config";
+import { I18nProvider } from "@/i18n/context";
 import appCss from "@/styles/app.css?url";
-import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
+import {
+  HeadContent,
+  Scripts,
+  createRootRoute,
+  useRouterState,
+} from "@tanstack/react-router";
 import { MotionConfig } from "framer-motion";
 import type { ReactNode } from "react";
 
@@ -32,18 +39,26 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: ReactNode }) {
+  // Derive the active locale from the URL so the document's lang/dir and the
+  // i18n context are correct for both the prerendered HTML and client nav.
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const locale = localeFromPathname(pathname);
+  const meta = LOCALE_META[locale];
+
   return (
-    <html lang="en">
+    <html lang={meta.htmlLang} dir={meta.dir}>
       <head>
         <HeadContent />
       </head>
       <body>
-        <MotionConfig reducedMotion="user">
-          <DevDateProvider>
-            {children}
-            <DevDatePicker />
-          </DevDateProvider>
-        </MotionConfig>
+        <I18nProvider locale={locale}>
+          <MotionConfig reducedMotion="user">
+            <DevDateProvider>
+              {children}
+              <DevDatePicker />
+            </DevDateProvider>
+          </MotionConfig>
+        </I18nProvider>
         <Scripts />
       </body>
     </html>

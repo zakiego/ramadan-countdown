@@ -20,9 +20,22 @@ export default defineConfig({
     tailwindcss(),
     cloudflare({ viteEnvironment: { name: "ssr" } }),
     tanstackStart({
+      // Dynamic `$locale` routes aren't auto-discovered, so list every
+      // localized page explicitly. `/` and `/eid` are still found by static
+      // path discovery. Keep this in sync with LOCALES in src/i18n/config.ts.
+      pages: [
+        { path: "/ar" },
+        { path: "/ar/eid" },
+        { path: "/es" },
+        { path: "/es/eid" },
+        { path: "/hi" },
+        { path: "/hi/eid" },
+        { path: "/zh" },
+        { path: "/zh/eid" },
+      ],
       prerender: {
         enabled: true,
-        // The API routes must stay dynamic — never bake them into static files
+        // The API routes must stay dynamic, never bake them into static files
         crawlLinks: false,
         filter: ({ path }) => !path.startsWith("/api"),
       },
