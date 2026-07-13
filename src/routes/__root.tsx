@@ -2,6 +2,7 @@ import { DevDatePicker } from "@/components/DevDatePicker";
 import { DevDateProvider } from "@/context/DevDateContext";
 import appCss from "@/styles/app.css?url";
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
+import { MotionConfig } from "framer-motion";
 import type { ReactNode } from "react";
 
 // Page-specific tags (title, description, canonical, og:url, og:image and
@@ -37,10 +38,12 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <DevDateProvider>
-          {children}
-          <DevDatePicker />
-        </DevDateProvider>
+        <MotionConfig reducedMotion="user">
+          <DevDateProvider>
+            {children}
+            <DevDatePicker />
+          </DevDateProvider>
+        </MotionConfig>
         <Scripts />
       </body>
     </html>
