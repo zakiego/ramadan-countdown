@@ -5,6 +5,11 @@ import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  // Single build timestamp shared by the server and client bundles so
+  // prerendered SEO copy (day counts, FAQ text) hydrates without mismatch
+  define: {
+    __BUILD_DATE__: JSON.stringify(new Date().toISOString()),
+  },
   server: {
     port: 3000,
   },
