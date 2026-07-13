@@ -5,6 +5,11 @@
   "compatibility_date": "2025-09-24",
   "compatibility_flags": ["nodejs_compat"],
   "main": "@tanstack/react-start/server-entry",
+  "assets": {
+    // Serve prerendered eid/index.html at /eid (not /eid/) so the live URL
+    // matches the canonical, sitemap, and router paths
+    "html_handling": "drop-trailing-slash"
+  },
   "observability": {
     "enabled": true
   }
