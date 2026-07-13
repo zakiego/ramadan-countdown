@@ -171,31 +171,51 @@ export interface PageSeo {
 function weeksAnswer(year: number, days: number): string {
   const weeks = Math.floor(days / 7);
   if (weeks < 1) {
-    return `Less than a week is left until Ramadan ${year}: just ${days} ${daysWord(days)} to go.`;
+    return `Less than a week is left until Ramadan ${year}: just ${days} ${daysWord(
+      days,
+    )} to go.`;
   }
-  return `About ${weeks} ${weeks === 1 ? "week" : "weeks"} (${days} ${daysWord(days)}) are left until Ramadan ${year}.`;
+  return `About ${weeks} ${weeks === 1 ? "week" : "weeks"} (${days} ${daysWord(
+    days,
+  )}) are left until Ramadan ${year}.`;
 }
 
 function monthsAnswer(year: number, days: number, start: Date): string {
   const months = Math.round(days / 30.44);
   if (months < 1) {
-    return `Less than a month is left until Ramadan ${year}: just ${days} ${daysWord(days)}.`;
+    return `Less than a month is left until Ramadan ${year}: just ${days} ${daysWord(
+      days,
+    )}.`;
   }
   const label = months === 1 ? "about 1 month" : `about ${months} months`;
-  return `There ${months === 1 ? "is" : "are"} ${label} (${days} ${daysWord(days)}) left until Ramadan ${year}, which is expected to begin on ${formatShortDate(start)}.`;
+  return `There ${months === 1 ? "is" : "are"} ${label} (${days} ${daysWord(
+    days,
+  )}) left until Ramadan ${year}, which is expected to begin on ${formatShortDate(
+    start,
+  )}.`;
 }
 
 function howLongFaq(target: RamadanData): Faq {
   return {
     question: "How long does Ramadan last?",
-    answer: `Ramadan lasts 29 or 30 days, one full lunar month. Ramadan ${formatHijri(target.hijriYear)} (${target.year}) is expected to run for ${totalRamadanDays(target)} days, from ${formatShortDate(target.ramadanStart)} to ${formatShortDate(target.ramadanEnd)}.`,
+    answer: `Ramadan lasts 29 or 30 days, one full lunar month. Ramadan ${formatHijri(
+      target.hijriYear,
+    )} (${target.year}) is expected to run for ${totalRamadanDays(
+      target,
+    )} days, from ${formatShortDate(target.ramadanStart)} to ${formatShortDate(
+      target.ramadanEnd,
+    )}.`,
   };
 }
 
 function whenIsEidFaq(target: RamadanData): Faq {
   return {
     question: `When is Eid al-Fitr ${target.year}?`,
-    answer: `Eid al-Fitr ${target.year}, the festival marking the end of Ramadan, is expected on ${formatFullDate(target.eidAlFitr)} (1 Shawwal ${formatHijri(target.hijriYear)}).`,
+    answer: `Eid al-Fitr ${
+      target.year
+    }, the festival marking the end of Ramadan, is expected on ${formatFullDate(
+      target.eidAlFitr,
+    )} (1 Shawwal ${formatHijri(target.hijriYear)}).`,
   };
 }
 
@@ -215,21 +235,43 @@ export function getHomeSeo(ramadans: RamadanData[], now: Date): PageSeo {
     const { dayOf, totalDays, daysUntilEid } = phase;
     return {
       title: `How Many Days Left in Ramadan ${year}? Day ${dayOf} of ${totalDays}`,
-      description: `Today is day ${dayOf} of ${totalDays} of Ramadan ${year}. ${daysUntilEid} ${daysWord(daysUntilEid)} left until Eid al-Fitr, expected on ${formatShortDate(target.eidAlFitr)}. Follow the live day tracker.`,
+      description: `Today is day ${dayOf} of ${totalDays} of Ramadan ${year}. ${daysUntilEid} ${daysWord(
+        daysUntilEid,
+      )} left until Eid al-Fitr, expected on ${formatShortDate(
+        target.eidAlFitr,
+      )}. Follow the live day tracker.`,
       h1: `Ramadan ${year}`,
-      answer: `Today is day ${dayOf} of ${totalDays} of Ramadan ${hijri} (${year}). ${daysUntilEid} ${daysWord(daysUntilEid)} ${daysUntilEid === 1 ? "is" : "are"} left until Eid al-Fitr, expected on ${formatFullDate(target.eidAlFitr)}, inshaAllah.`,
+      answer: `Today is day ${dayOf} of ${totalDays} of Ramadan ${hijri} (${year}). ${daysUntilEid} ${daysWord(
+        daysUntilEid,
+      )} ${
+        daysUntilEid === 1 ? "is" : "are"
+      } left until Eid al-Fitr, expected on ${formatFullDate(
+        target.eidAlFitr,
+      )}, inshaAllah.`,
       faqs: [
         {
           question: `How many days are left in Ramadan ${year}?`,
-          answer: `Today is day ${dayOf} of ${totalDays} of Ramadan ${hijri}. There ${daysUntilEid === 1 ? "is" : "are"} ${daysUntilEid} ${daysWord(daysUntilEid)} left until Eid al-Fitr, expected on ${formatFullDate(target.eidAlFitr)}.`,
+          answer: `Today is day ${dayOf} of ${totalDays} of Ramadan ${hijri}. There ${
+            daysUntilEid === 1 ? "is" : "are"
+          } ${daysUntilEid} ${daysWord(
+            daysUntilEid,
+          )} left until Eid al-Fitr, expected on ${formatFullDate(
+            target.eidAlFitr,
+          )}.`,
         },
         {
           question: `When does Ramadan ${year} end?`,
-          answer: `The last day of fasting is expected to be ${formatFullDate(target.ramadanEnd)}, with Eid al-Fitr on ${formatFullDate(target.eidAlFitr)}, depending on the moon sighting.`,
+          answer: `The last day of fasting is expected to be ${formatFullDate(
+            target.ramadanEnd,
+          )}, with Eid al-Fitr on ${formatFullDate(
+            target.eidAlFitr,
+          )}, depending on the moon sighting.`,
         },
         {
           question: `When did Ramadan ${year} start?`,
-          answer: `Ramadan ${hijri} began on ${formatFullDate(target.ramadanStart)} (1 Ramadan).`,
+          answer: `Ramadan ${hijri} began on ${formatFullDate(
+            target.ramadanStart,
+          )} (1 Ramadan).`,
         },
         howLongFaq(target),
         whenIsEidFaq(target),
@@ -245,13 +287,17 @@ export function getHomeSeo(ramadans: RamadanData[], now: Date): PageSeo {
     const faqs: Faq[] = [
       {
         question: `When is Eid al-Fitr ${year}?`,
-        answer: `Eid al-Fitr ${year} falls on ${formatFullDate(target.eidAlFitr)} (1 Shawwal ${hijri}), marking the end of Ramadan.`,
+        answer: `Eid al-Fitr ${year} falls on ${formatFullDate(
+          target.eidAlFitr,
+        )} (1 Shawwal ${hijri}), marking the end of Ramadan.`,
       },
     ];
     if (next) {
       faqs.push({
         question: `When is Ramadan ${next.year}?`,
-        answer: `Ramadan ${next.year} (1 Ramadan ${formatHijri(next.hijriYear)}) is expected to begin on ${formatFullDate(next.ramadanStart)}.`,
+        answer: `Ramadan ${next.year} (1 Ramadan ${formatHijri(
+          next.hijriYear,
+        )}) is expected to begin on ${formatFullDate(next.ramadanStart)}.`,
       });
     }
     faqs.push(howLongFaq(target), WHAT_IS_RAMADAN_FAQ);
@@ -259,7 +305,9 @@ export function getHomeSeo(ramadans: RamadanData[], now: Date): PageSeo {
       title: `Eid Mubarak! Eid al-Fitr ${year} Has Arrived`,
       description: `Today is Eid al-Fitr, 1 Shawwal ${hijri}, marking the end of Ramadan ${year}. Taqabbalallahu minna wa minkum, Eid Mubarak!`,
       h1: `Eid al-Fitr ${year}`,
-      answer: `Today, ${formatFullDate(target.eidAlFitr)}, is Eid al-Fitr (1 Shawwal ${hijri}), the celebration marking the end of Ramadan ${year}. Eid Mubarak!`,
+      answer: `Today, ${formatFullDate(
+        target.eidAlFitr,
+      )}, is Eid al-Fitr (1 Shawwal ${hijri}), the celebration marking the end of Ramadan ${year}. Eid Mubarak!`,
       faqs,
     };
   }
@@ -267,17 +315,31 @@ export function getHomeSeo(ramadans: RamadanData[], now: Date): PageSeo {
   const { daysUntil } = phase;
   return {
     title: `How Many Days Until Ramadan ${year}? Live Countdown`,
-    description: `Ramadan ${year} is expected to begin on ${formatShortDate(target.ramadanStart)}, ${daysUntil} ${daysWord(daysUntil)} from today. Live countdown of the days, weeks, and months left.`,
+    description: `Ramadan ${year} is expected to begin on ${formatShortDate(
+      target.ramadanStart,
+    )}, ${daysUntil} ${daysWord(
+      daysUntil,
+    )} from today. Live countdown of the days, weeks, and months left.`,
     h1: `Ramadan Countdown ${year}`,
-    answer: `Ramadan ${year} is expected to begin on ${formatFullDate(target.ramadanStart)}, inshaAllah. That is ${daysUntil} ${daysWord(daysUntil)} from today.`,
+    answer: `Ramadan ${year} is expected to begin on ${formatFullDate(
+      target.ramadanStart,
+    )}, inshaAllah. That is ${daysUntil} ${daysWord(daysUntil)} from today.`,
     faqs: [
       {
         question: `How many days until Ramadan ${year}?`,
-        answer: `There are ${daysUntil} ${daysWord(daysUntil)} until Ramadan ${year}. The first day of fasting is expected to be ${formatFullDate(target.ramadanStart)} (1 Ramadan ${hijri}), depending on the sighting of the crescent moon.`,
+        answer: `There are ${daysUntil} ${daysWord(
+          daysUntil,
+        )} until Ramadan ${year}. The first day of fasting is expected to be ${formatFullDate(
+          target.ramadanStart,
+        )} (1 Ramadan ${hijri}), depending on the sighting of the crescent moon.`,
       },
       {
         question: `When does Ramadan ${year} start?`,
-        answer: `Ramadan ${year} is expected to begin at sunset on ${formatFullDate(addDaysUtc(target.ramadanStart, -1))}, with the first full day of fasting on ${formatFullDate(target.ramadanStart)}. The exact date depends on the moon sighting in your country.`,
+        answer: `Ramadan ${year} is expected to begin at sunset on ${formatFullDate(
+          addDaysUtc(target.ramadanStart, -1),
+        )}, with the first full day of fasting on ${formatFullDate(
+          target.ramadanStart,
+        )}. The exact date depends on the moon sighting in your country.`,
       },
       {
         question: `How many weeks until Ramadan ${year}?`,
@@ -319,33 +381,56 @@ export function getEidSeo(ramadans: RamadanData[], now: Date): PageSeo {
     if (next) {
       faqs.push({
         question: "When is the next Eid al-Fitr?",
-        answer: `The next Eid al-Fitr (${next.year}) is expected on ${formatFullDate(next.eidAlFitr)} (1 Shawwal ${formatHijri(next.hijriYear)}).`,
+        answer: `The next Eid al-Fitr (${
+          next.year
+        }) is expected on ${formatFullDate(
+          next.eidAlFitr,
+        )} (1 Shawwal ${formatHijri(next.hijriYear)}).`,
       });
     }
     return {
       title: `Eid Mubarak! Eid al-Fitr ${year} Is Here`,
       description: `Eid al-Fitr ${year} (1 Shawwal ${hijri}) has arrived. Taqabbalallahu minna wa minkum, Eid Mubarak!`,
       h1: `Eid al-Fitr ${year}`,
-      answer: `Eid Mubarak! Eid al-Fitr ${year} (1 Shawwal ${hijri}) began on ${formatFullDate(target.eidAlFitr)}. Taqabbalallahu minna wa minkum.`,
+      answer: `Eid Mubarak! Eid al-Fitr ${year} (1 Shawwal ${hijri}) began on ${formatFullDate(
+        target.eidAlFitr,
+      )}. Taqabbalallahu minna wa minkum.`,
       faqs,
     };
   }
 
   const { daysUntil } = phase;
-  const ramadanStarted = toUtcMidnight(now) >= toUtcMidnight(target.ramadanStart);
+  const ramadanStarted =
+    toUtcMidnight(now) >= toUtcMidnight(target.ramadanStart);
   return {
     title: `How Many Days Until Eid al-Fitr ${year}? Countdown`,
-    description: `Eid al-Fitr ${year} is expected on ${formatShortDate(target.eidAlFitr)}, ${daysUntil} ${daysWord(daysUntil)} from today. Live countdown to Eid ul-Fitr in days, hours, minutes, and seconds.`,
+    description: `Eid al-Fitr ${year} is expected on ${formatShortDate(
+      target.eidAlFitr,
+    )}, ${daysUntil} ${daysWord(
+      daysUntil,
+    )} from today. Live countdown to Eid ul-Fitr in days, hours, minutes, and seconds.`,
     h1: `Eid al-Fitr Countdown ${year}`,
-    answer: `Eid al-Fitr ${year} is expected on ${formatFullDate(target.eidAlFitr)} (1 Shawwal ${hijri}), inshaAllah. That is ${daysUntil} ${daysWord(daysUntil)} from today.`,
+    answer: `Eid al-Fitr ${year} is expected on ${formatFullDate(
+      target.eidAlFitr,
+    )} (1 Shawwal ${hijri}), inshaAllah. That is ${daysUntil} ${daysWord(
+      daysUntil,
+    )} from today.`,
     faqs: [
       {
         question: `How many days until Eid al-Fitr ${year}?`,
-        answer: `There are ${daysUntil} ${daysWord(daysUntil)} until Eid al-Fitr ${year}, expected on ${formatFullDate(target.eidAlFitr)}, depending on the moon sighting.`,
+        answer: `There are ${daysUntil} ${daysWord(
+          daysUntil,
+        )} until Eid al-Fitr ${year}, expected on ${formatFullDate(
+          target.eidAlFitr,
+        )}, depending on the moon sighting.`,
       },
       {
         question: `When is Eid al-Fitr ${year}?`,
-        answer: `Eid al-Fitr ${year} (1 Shawwal ${hijri}) is expected on ${formatFullDate(target.eidAlFitr)}. It marks the end of Ramadan, which ${ramadanStarted ? "began" : "is expected to begin"} on ${formatShortDate(target.ramadanStart)}.`,
+        answer: `Eid al-Fitr ${year} (1 Shawwal ${hijri}) is expected on ${formatFullDate(
+          target.eidAlFitr,
+        )}. It marks the end of Ramadan, which ${
+          ramadanStarted ? "began" : "is expected to begin"
+        } on ${formatShortDate(target.ramadanStart)}.`,
       },
       whatIsEidFaq,
       adhaFaq,

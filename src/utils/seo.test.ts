@@ -81,9 +81,7 @@ describe("getHomeSeo", () => {
 
   it("switches to days-left copy during Ramadan", () => {
     const seo = getHomeSeo(ramadans, new Date("2027-02-18T12:00:00Z"));
-    expect(seo.title).toBe(
-      "How Many Days Left in Ramadan 2027? Day 12 of 30",
-    );
+    expect(seo.title).toBe("How Many Days Left in Ramadan 2027? Day 12 of 30");
     expect(seo.answer).toContain("day 12 of 30");
     expect(seo.answer).toContain("19 days");
     expect(
@@ -96,9 +94,9 @@ describe("getHomeSeo", () => {
   it("celebrates on Eid day and points at the next year", () => {
     const seo = getHomeSeo(ramadans, new Date("2026-03-20T09:00:00Z"));
     expect(seo.title).toContain("Eid Mubarak");
-    expect(
-      seo.faqs.some((f) => f.question === "When is Ramadan 2027?"),
-    ).toBe(true);
+    expect(seo.faqs.some((f) => f.question === "When is Ramadan 2027?")).toBe(
+      true,
+    );
   });
 
   it("handles the singular day correctly the day before Ramadan", () => {
