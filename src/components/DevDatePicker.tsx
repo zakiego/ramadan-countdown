@@ -77,7 +77,7 @@ export function DevDatePicker() {
       <button
         type="button"
         onClick={() => setIsMinimized(false)}
-        className={`fixed bottom-4 right-4 z-50 p-3 rounded-full shadow-lg transition-all hover:scale-110 ${
+        className={`fixed bottom-4 right-4 z-50 p-3 rounded-full shadow-lg transition-transform duration-[160ms] ease-out hover:scale-105 ${
           isSimulating
             ? "bg-amber-500 text-white"
             : "bg-gray-800 text-gray-300 hover:bg-gray-700"

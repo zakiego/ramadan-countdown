@@ -1,0 +1,39 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="0%" r="120%">
+      <stop offset="0%" stop-color="#1a4a3e"/>
+      <stop offset="55%" stop-color="#0d2e26"/>
+      <stop offset="100%" stop-color="#051410"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="50%" stop-color="#fffbeb"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+    <mask id="crescent">
+      <rect width="1200" height="630" fill="black"/>
+      <circle cx="578" cy="165" r="80" fill="white"/>
+      <circle cx="616" cy="138" r="70" fill="black"/>
+    </mask>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <circle cx="110" cy="90" r="240" fill="#f59e0b" opacity="0.09"/>
+  <circle cx="1090" cy="560" r="260" fill="#059669" opacity="0.10"/>
+
+  <circle cx="205" cy="170" r="3" fill="#fde68a" opacity="0.55"/>
+  <circle cx="320" cy="90" r="2" fill="#fde68a" opacity="0.4"/>
+  <circle cx="905" cy="120" r="3" fill="#fde68a" opacity="0.5"/>
+  <circle cx="1010" cy="210" r="2" fill="#fde68a" opacity="0.4"/>
+  <circle cx="760" cy="70" r="2" fill="#fde68a" opacity="0.35"/>
+  <circle cx="440" cy="130" r="2" fill="#fde68a" opacity="0.35"/>
+
+  <circle cx="578" cy="165" r="100" fill="#fbbf24" opacity="0.08"/>
+  <rect width="1200" height="630" fill="#fbbf24" mask="url(#crescent)"/>
+  <path d="M 668 132 l 7.6 15.4 17 2.5 -12.3 12 2.9 16.9 -15.2 -8 -15.2 8 2.9 -16.9 -12.3 -12 17 -2.5 z" fill="#fbbf24" opacity="0.9"/>
+
+  <text x="600" y="382" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-weight="bold" fill="url(#gold)">Eid al-Fitr Countdown</text>
+  <text x="600" y="452" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="34" fill="#a7f3d0" opacity="0.85">How many days until Eid?</text>
+  <text x="600" y="556" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="22" letter-spacing="6" fill="#fde68a" opacity="0.6">RAMADAN.ZAKIEGO.COM</text>
+</svg>

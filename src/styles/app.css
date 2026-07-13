@@ -40,3 +40,14 @@
     }
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  /* Keep the opacity fade, drop all movement */
+  .animate-slide-up {
+    animation: fade-in 0.4s ease-out forwards;
+  }
+  .animate-float,
+  .animate-float-delayed {
+    animation: none;
+  }
+}

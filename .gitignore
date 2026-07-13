@@ -10,6 +10,8 @@
 # generated
 src/routeTree.gen.ts
 worker-configuration.d.ts
+# written by scripts/generate-sitemap.mjs during pnpm build
+public/sitemap.xml
 
 # misc
 .DS_Store

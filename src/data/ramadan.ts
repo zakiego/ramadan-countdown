@@ -47,4 +47,25 @@ export const ramadanData: RamadanData[] = [
     ramadanEnd: new Date("2027-03-08"),
     eidAlFitr: new Date("2027-03-09"),
   },
+  {
+    year: 2028,
+    hijriYear: "1449H",
+    ramadanStart: new Date("2028-01-28"),
+    ramadanEnd: new Date("2028-02-25"),
+    eidAlFitr: new Date("2028-02-26"),
+  },
+  {
+    year: 2029,
+    hijriYear: "1450H",
+    ramadanStart: new Date("2029-01-16"),
+    ramadanEnd: new Date("2029-02-13"),
+    eidAlFitr: new Date("2029-02-14"),
+  },
+  {
+    year: 2030,
+    hijriYear: "1451H",
+    ramadanStart: new Date("2030-01-05"),
+    ramadanEnd: new Date("2030-02-03"),
+    eidAlFitr: new Date("2030-02-04"),
+  },
 ];
