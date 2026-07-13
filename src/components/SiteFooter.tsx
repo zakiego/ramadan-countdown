@@ -10,7 +10,7 @@ export function SiteFooter({
   internalLink: { to: "/" | "/eid"; label: string };
 }) {
   return (
-    <div className="mt-16 flex flex-col md:flex-row items-center gap-4 md:gap-6 opacity-40 hover:opacity-100 transition-opacity duration-500 text-[10px] tracking-[0.2em] uppercase font-medium text-center">
+    <div className="mt-16 flex flex-col md:flex-row items-center gap-4 md:gap-6 opacity-40 hover:opacity-100 transition-opacity duration-200 text-[10px] tracking-[0.2em] uppercase font-medium text-center">
       <Link
         to={internalLink.to}
         className="hover:text-amber-200 transition-colors"

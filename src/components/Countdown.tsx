@@ -29,15 +29,27 @@ function CountdownDisplay({
       className="w-full bg-emerald-900/10 backdrop-blur-xl border border-emerald-500/10 shadow-2xl rounded-3xl p-8 md:p-12 relative overflow-hidden ring-1 ring-emerald-500/10"
     >
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center relative z-10">
-        <NumberBox value={state.countdown.days} label="Days" />
-        <NumberBox value={state.countdown.hours} label="Hours" />
-        <NumberBox value={state.countdown.minutes} label="Minutes" />
-        <NumberBox value={state.countdown.seconds} label="Seconds" />
+        <NumberBox value={state.countdown.days} label="Days" enterDelay={0} />
+        <NumberBox
+          value={state.countdown.hours}
+          label="Hours"
+          enterDelay={0.05}
+        />
+        <NumberBox
+          value={state.countdown.minutes}
+          label="Minutes"
+          enterDelay={0.1}
+        />
+        <NumberBox
+          value={state.countdown.seconds}
+          label="Seconds"
+          enterDelay={0.15}
+        />
       </div>
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
+        transition={{ delay: 0.25, duration: 0.4, ease: "easeOut" }}
         className="mt-12 text-center relative z-10"
       >
         <div className="inline-flex items-center px-6 py-3 rounded-full bg-emerald-900/20 border border-emerald-500/10 backdrop-blur-md">
