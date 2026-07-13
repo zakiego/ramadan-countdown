@@ -1,6 +1,6 @@
 # 004 - Hardware-accelerate the per-second digit roll
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 27f5a54
 - **Severity**: MEDIUM
 - **Category**: Performance

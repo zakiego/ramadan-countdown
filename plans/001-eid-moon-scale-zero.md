@@ -1,6 +1,6 @@
 # 001 - Fix the Eid moon entering from scale(0)
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 27f5a54
 - **Severity**: HIGH
 - **Category**: Physicality & origin

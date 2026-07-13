@@ -4,11 +4,11 @@ Written by the improve-animations audit at commit 27f5a54 (2026-07-13). Each pla
 
 | # | Plan | Severity | Status |
 | --- | --- | --- | --- |
-| 001 | [Fix the Eid moon entering from scale(0)](001-eid-moon-scale-zero.md) | HIGH | TODO |
-| 002 | [Respect prefers-reduced-motion everywhere](002-prefers-reduced-motion.md) | MEDIUM | TODO |
-| 003 | [Remove the skeleton-to-card layout jump](003-skeleton-card-swap-seam.md) | MEDIUM | TODO |
-| 004 | [Hardware-accelerate the digit roll](004-hardware-accelerate-digit-roll.md) | MEDIUM | TODO |
-| 005 | [Tighten entrance choreography, stagger digits, hover timing](005-tighten-entrance-choreography.md) | MEDIUM | TODO |
+| 001 | [Fix the Eid moon entering from scale(0)](001-eid-moon-scale-zero.md) | HIGH | DONE |
+| 002 | [Respect prefers-reduced-motion everywhere](002-prefers-reduced-motion.md) | MEDIUM | DONE |
+| 003 | [Remove the skeleton-to-card layout jump](003-skeleton-card-swap-seam.md) | MEDIUM | DONE |
+| 004 | [Hardware-accelerate the digit roll](004-hardware-accelerate-digit-roll.md) | MEDIUM | DONE |
+| 005 | [Tighten entrance choreography, stagger digits, hover timing](005-tighten-entrance-choreography.md) | MEDIUM | DONE |
 
 ## Recommended order
 

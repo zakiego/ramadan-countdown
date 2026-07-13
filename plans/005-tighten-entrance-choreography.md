@@ -1,6 +1,6 @@
 # 005 - Tighten entrance choreography, stagger the digits, fix hover timing
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 27f5a54
 - **Severity**: MEDIUM
 - **Category**: Easing & duration / cohesion

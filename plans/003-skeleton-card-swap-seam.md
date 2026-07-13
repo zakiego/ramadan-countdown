@@ -1,6 +1,6 @@
 # 003 - Remove the layout jump when the skeleton swaps to the live card
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 27f5a54
 - **Severity**: MEDIUM
 - **Category**: Missed opportunities / jarring state change (plus CLS)

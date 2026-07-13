@@ -1,6 +1,6 @@
 # 002 - Respect prefers-reduced-motion everywhere
 
-- **Status**: TODO
+- **Status**: DONE
 - **Commit**: 27f5a54
 - **Severity**: MEDIUM
 - **Category**: Accessibility
