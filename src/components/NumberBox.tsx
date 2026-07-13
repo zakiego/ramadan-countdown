@@ -18,10 +18,12 @@ export const NumberBox = ({
         <AnimatePresence mode="popLayout">
           <motion.p
             key={displayValue}
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -20, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            // Full transform strings hand the animation to the compositor;
+            // the y shorthand would tween on the main thread every second
+            initial={{ transform: "translateY(20px)", opacity: 0 }}
+            animate={{ transform: "translateY(0px)", opacity: 1 }}
+            exit={{ transform: "translateY(-20px)", opacity: 0 }}
+            transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
             className="text-5xl md:text-7xl font-bold text-white tabular-nums tracking-tight drop-shadow-lg"
           >
             {displayValue}
