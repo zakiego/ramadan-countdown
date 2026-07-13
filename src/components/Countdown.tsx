@@ -72,6 +72,9 @@ function CountdownDisplay({
                 day: "numeric",
                 month: "long",
                 year: "numeric",
+                // Dates are stored as UTC midnight; format in UTC so users in
+                // negative-offset timezones don't see the previous calendar day
+                timeZone: "UTC",
               })}
             </span>
           </p>
