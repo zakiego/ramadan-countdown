@@ -49,7 +49,7 @@ export type RamadanDisplayState =
 /**
  * Normalize a date to midnight (start of day) in local time
  */
-function normalizeToMidnight(date: Date): Date {
+export function normalizeToMidnight(date: Date): Date {
   const normalized = new Date(date);
   normalized.setHours(0, 0, 0, 0);
   return normalized;
@@ -79,7 +79,7 @@ function getTotalRamadanDays(ramadanStart: Date, ramadanEnd: Date): number {
 /**
  * Calculate countdown to a target date
  */
-function calculateCountdown(
+export function calculateCountdown(
   targetDate: Date,
   currentDate: Date,
 ): { days: number; hours: number; minutes: number; seconds: number } {
