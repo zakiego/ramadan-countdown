@@ -9,7 +9,7 @@
 
 This is a simple countdown app for Ramadan. It is built with [TanStack Start](https://tanstack.com/start) and deployed to [Cloudflare Workers](https://developers.cloudflare.com/workers/).
 
-The page is prerendered to static HTML at build time and served as a static asset — page views never invoke the Worker, so traffic spikes during Ramadan season don't count against Workers request limits. Only the JSON API endpoints below run in the Worker.
+The pages (the home countdown and the [Eid al-Fitr countdown](https://ramadan.zakiego.com/eid)) are prerendered to static HTML at build time and served as static assets — page views never invoke the Worker, so traffic spikes during Ramadan season don't count against Workers request limits. Only the JSON API endpoints below run in the Worker.
 
 ## API
 
@@ -63,4 +63,4 @@ Edit `src/data/ramadan.ts` and add a new entry to the `ramadanData` array, then 
 pnpm run deploy
 ```
 
-CI deploys `main` automatically (plus a monthly scheduled rebuild so the prerendered SEO metadata rolls over to the next year after Eid). See `docs/cloudflare-deployment.md` for details.
+CI deploys `main` automatically (plus a daily scheduled rebuild so the prerendered day counts, sitemap `lastmod`, and seasonal SEO copy stay current). See `docs/cloudflare-deployment.md` for details.

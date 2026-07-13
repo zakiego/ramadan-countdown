@@ -8,16 +8,16 @@ The app previously ran Next.js via OpenNext, where **every page view invoked the
 
 Now:
 
-1. `vite build` prerenders the home page to `dist/client/index.html` at build time.
-2. `wrangler deploy` uploads `dist/client` as **static assets** and `dist/server` as the Worker.
-3. Requests are matched against static assets **first** — `/`, JS/CSS bundles, fonts, icons, `robots.txt`, `sitemap.xml` are all served without invoking the Worker. Static asset requests are **free and unlimited** on every Workers plan.
+1. `vite build` prerenders the pages (`/` and `/eid`) to static HTML at build time. A prebuild script also writes `public/sitemap.xml` with a fresh `lastmod`.
+2. `wrangler deploy` uploads `dist/client` as **static assets** and `dist/server` as the Worker. `html_handling: "drop-trailing-slash"` makes `eid/index.html` serve at `/eid`, matching the canonical URLs.
+3. Requests are matched against static assets **first** — pages, JS/CSS bundles, fonts, icons, `robots.txt`, `sitemap.xml` are all served without invoking the Worker. Static asset requests are **free and unlimited** on every Workers plan.
 4. Only `/api/*` (and stray 404 paths) invoke the Worker.
 
 So daily page traffic costs zero Worker requests; only API calls count.
 
 ### Consequence: rebuild to refresh SEO metadata
 
-The `<title>`/description/JSON-LD year ("Ramadan Countdown 2027") is computed at build time. Redeploy after each Eid and when adding a new year to `src/data/ramadan.ts`. CI runs a monthly scheduled rebuild as a safety net.
+All SEO copy (title, description, JSON-LD, the "N days from today" answer, and the FAQ text) is computed at build time from `__BUILD_DATE__` (see `src/utils/seo.ts`). CI runs a daily scheduled rebuild so the prerendered day counts stay current, the sitemap `lastmod` updates, and the copy switches phases automatically (countdown before Ramadan, day tracker during, Eid greetings on the day). Deploy manually only when adding a new year to `src/data/ramadan.ts` or shipping code changes.
 
 ## Configuration Files
 
