@@ -194,8 +194,8 @@ function EidDisplay({
     >
       <div className="text-center relative z-10">
         <motion.div
-          initial={{ scale: 0, rotate: -10 }}
-          animate={{ scale: 1, rotate: 0 }}
+          initial={{ scale: 0.9, opacity: 0, rotate: -10 }}
+          animate={{ scale: 1, opacity: 1, rotate: 0 }}
           transition={{
             type: "spring",
             stiffness: 200,
