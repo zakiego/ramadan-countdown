@@ -59,8 +59,13 @@ jobs:
       - name: Build
         run: pnpm run build
 
+      # Deploy-only asset routing; see the script header for why it cannot
+      # live in wrangler.jsonc (it would break the prerender step).
+      - name: Generate deploy config
+        run: node scripts/build-deploy-config.mjs
+
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: deploy
+          command: deploy -c dist/server/wrangler.json

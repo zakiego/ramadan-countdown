@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0d2e26" />
+    <title>404 · Ramadan Countdown</title>
+    <link rel="icon" href="/favicon.ico" />
+    <!--
+      Served straight from the asset store for any path that matches no asset,
+      so bot probes never wake the Worker. That means no app bundle and no
+      Tailwind here, hence the inline styles — they mirror
+      src/components/NotFound.tsx, which still handles client-side navigation.
+    -->
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 0 1rem;
+        background-color: #051410;
+        background-image: radial-gradient(
+          ellipse at top,
+          #1a4a3e 0%,
+          #0d2e26 45%,
+          #051410 100%
+        );
+        color: #fff;
+        font-family:
+          "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system,
+          "Segoe UI", Roboto, sans-serif;
+        text-align: center;
+      }
+      h1 {
+        margin: 0 0 1rem;
+        font-family: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+        font-size: 3.75rem;
+        font-weight: 700;
+        line-height: 1;
+        color: #fef3c7;
+      }
+      p {
+        margin: 0 0 2rem;
+        color: rgb(209 250 229 / 0.7);
+      }
+      a {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border: 1px solid rgb(16 185 129 / 0.1);
+        border-radius: 9999px;
+        background-color: rgb(6 78 59 / 0.2);
+        color: #ecfdf5;
+        text-decoration: none;
+        transition: color 150ms;
+      }
+      a:hover {
+        color: #fde68a;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>404</h1>
+    <p>This page could not be found.</p>
+    <a href="/">Back to the countdown</a>
+  </body>
+</html>
