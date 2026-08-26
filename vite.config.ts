@@ -32,12 +32,17 @@ export default defineConfig({
         { path: "/hi/eid" },
         { path: "/zh" },
         { path: "/zh/eid" },
+        // /api/history is a compile-time constant, so bake it into a static
+        // asset — served free instead of invoking the Worker per request.
+        { path: "/api/history" },
       ],
       prerender: {
         enabled: true,
-        // The API routes must stay dynamic, never bake them into static files
+        // /api/countdown and /api/ramadan depend on the clock, so they must
+        // stay dynamic. /api/history does not.
         crawlLinks: false,
-        filter: ({ path }) => !path.startsWith("/api"),
+        filter: ({ path }) =>
+          !path.startsWith("/api") || path === "/api/history",
       },
     }),
     viteReact(),

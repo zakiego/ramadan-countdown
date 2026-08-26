@@ -8,7 +8,7 @@
     "dev": "vite dev",
     "build": "node scripts/generate-sitemap.mjs && vite build && tsc --noEmit",
     "preview": "vite preview",
-    "deploy": "pnpm run build && wrangler deploy",
+    "deploy": "pnpm run build && node scripts/build-deploy-config.mjs && wrangler deploy -c dist/server/wrangler.json",
     "cf-typegen": "wrangler types",
     "test": "vitest run",
     "lint": "biome check ."

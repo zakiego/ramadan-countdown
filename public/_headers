@@ -3,3 +3,11 @@
 
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Prerendered to a static asset, so it never invokes the Worker. It has no file
+# extension, so the type has to be declared here. CORS matches the other public
+# JSON endpoints; the data only changes when a new Ramadan year is added.
+/api/history
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600, must-revalidate
