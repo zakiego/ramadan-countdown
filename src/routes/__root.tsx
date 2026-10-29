@@ -49,6 +49,14 @@ function RootDocument({ children }: { children: ReactNode }) {
     <html lang={meta.htmlLang} dir={meta.dir}>
       <head>
         <HeadContent />
+        {/* Self-hosted Umami. Kept in the shell, not head().scripts, so client
+            navigation doesn't re-inject it and double count page views. */}
+        <script
+          defer
+          src="https://umami.zakiego.com/stats.js"
+          data-website-id="1f1f8e56-975b-4ed2-ba46-ad1a0c08c3fd"
+          data-domains="ramadan.zakiego.com"
+        />
       </head>
       <body>
         <I18nProvider locale={locale}>
