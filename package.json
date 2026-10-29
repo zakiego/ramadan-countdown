@@ -35,8 +35,5 @@
     "vite": "^8.0.14",
     "vitest": "^4.0.8",
     "wrangler": "^4.74.0"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild", "workerd", "sharp"]
   }
 }

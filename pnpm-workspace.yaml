@@ -1,0 +1,12 @@
+# pnpm 11+ reads allowBuilds. pnpm 10 (the version CI pins) reads
+# onlyBuiltDependencies. Keep both lists in sync until CI moves up.
+allowBuilds:
+  "@biomejs/biome": true
+  esbuild: true
+  sharp: true
+  workerd: true
+onlyBuiltDependencies:
+  - "@biomejs/biome"
+  - esbuild
+  - sharp
+  - workerd
